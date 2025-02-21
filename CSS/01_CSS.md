@@ -1,4 +1,4 @@
-## CSS 란
+# CSS 란
 - Cascading Style Sheets의 약자
   - `Cascading`
     - 폭포 같은, 연속 되는, 우선순위가 있는..

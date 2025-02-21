@@ -65,7 +65,7 @@ console.log(add(1, 2)); // 3
 console.log(sum(1, 2)); // 3
 ```
 
-<img width="1012px" src="../images/function.png" alt="함수와 메모리" />
+<img src="../images/function.png" alt="함수와 메모리" />
 
 
 <br />

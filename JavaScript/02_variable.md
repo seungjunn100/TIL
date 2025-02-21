@@ -79,7 +79,7 @@ let audioWind;
 
 <br />
 
-<img width="1012px" src="../images/memory.png" alt="memory 할당" />
+<img src="../images/memory.png" alt="memory 할당" />
 
 
 <br />

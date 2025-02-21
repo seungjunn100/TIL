@@ -39,10 +39,13 @@
 ### 웹 접근성을 준수하는 방법
 - 시각적 요소 처리
   - 대체 텍스트, 적절한 색상 대비, 텍스트 크기 등을 고려하여 시각적 요소를 처리해야 한다.
+
 - 청각적 요소 처리
   - 자막, 수화, 오디오 설명 등을 제공하여 청각적 요소를 처리해야 한다.
+
 - 키보드 접근성
   - 지체 장애인은 마우스를 사용하지 못하므로 키보드만으로 웹 사이트를 이용할 수 있도록 구현해야 한다.
+
 - 웹 접근성 검사
   - [Accessibility Korea](https://accessibility.kr/)
   - [OpenWAX](https://chromewebstore.google.com/detail/openwax/bfahpbmaknaeohgdklfbobogpdngngoe)
