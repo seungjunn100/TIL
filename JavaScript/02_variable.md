@@ -5,14 +5,19 @@
 
 - 변수에 값을 할당하여 선언하면 메모리 어딘가의 주소에 값이 저장된다.
 
+- `var`
+  - 재할당 가능
+  - 구식 방식
+  - 예상치 못한 버그가 발생할 수 있다.
+
 - `let`
   - 재할당 가능
+  - 최신 표준
 
 - `const`
   - 재할당 불가능
-  - 상수, 상수 변수 또는 변수 `상수 : 변수의 값이 절대 변하지 않는다.`
-
-- `var`
+  - 상수 선언
+  - 객체, 배열은 값 변경 가능
 
 
 <br />
@@ -73,9 +78,9 @@ let audioWind;
   - Data
     - 전역, 정적 변수가 저장되는 영역
   - Stack
-    - 함수의 호출과 관계되는 지역, 매개 변수가 저장되는 영역
+    - 함수의 호출과 관계되는 지역 변수, 매개 변수가 저장되는 영역
   - Heap
-    - 객체(복잡한 여러가지의 데이터를 함께 묶어 놓은 타입)가 할당이 되는 영역
+    - 객체, 동적으로 할당된 배열, 함수 참조, 동적 변수 등이 저장되는 영역
 
 <br />
 
@@ -154,17 +159,20 @@ string = "'안녕!'";
 string = '"안녕!"';
 
 // 이스케이프 표현
-// https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String
 string = '안녕!\n내 이름은\t\t백이야\\\u09AC';
 
 // 템플릿 리터럴 (Template Literal)
 let id = '길동';
+
 // ES6 이전에는 다음과 같이 작성하였다.
 let greetings = "'안녕!, " + id + "👋🏻\n즐거운 하루 보내!'"
+
 // ES6부터는 Backtick(``)을 사용하여 더 쉽게 작성할 수 있게 되었다.
 greetings = `'안녕!, ${id}👋🏻
 즐거운 하루 보내!'`;
 ```
+
+- [MDN - String](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String)
 
 
 <br />
