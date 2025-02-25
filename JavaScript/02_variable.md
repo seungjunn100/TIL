@@ -16,7 +16,7 @@
 
 - `const`
   - 재할당 불가능
-  - 상수 선언
+  - 상수, 재할당 불가능한 상수 변수 또는 변수(ex. 객체) 선언
   - 객체, 배열은 값 변경 가능
 
 
@@ -319,21 +319,23 @@ console.log(orange); // { name: '오렌지' }
 ## 상수 변수 const
 ```javascript
 const text = 'Hello';
-// text = 'Hi'; - 재할당 불가능
+// 재할당 오류
+text = 'Hi'; // TypeError: Assignment to constant variable.
 
-console.log(text);
+console.log(text); // Hello
 
 // 1. 상수
 const MAX_FRUIT = 5;
 // 상수를 사용할때는 변수를 항상 대문자, 단어와 단어 사이에는 underscore 분리
 
-// 2. 재할당 불가능한 상수 변수 또는 변수
+// 2. 재할당 불가능한 상수 변수
 const apple = {
   name: '사과',
   color: 'red',
   display: '🍎',
 };
-// apple = {}; - object 자체를 재할당하는 것은 불가능
+// apple = {}; - 객체 자체를 재할당하는 것은 불가능
+// 객체의 프로퍼티는 변경 가능
 
 console.log(apple); // { name: '사과', color: 'red', display: '🍎' }
 
