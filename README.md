@@ -22,7 +22,7 @@
   - [CSS Grid](/CSS/07_Grid.md)
 
 - ### JavaScript
-  - [JavaScript](/JavaScript/01_JavaScript.md)
+  - [JavaScript 정의](/JavaScript/01_JavaScript.md)
   - [변수(Variable)](/JavaScript/02_Variable.md)
   - [연산자(Operator)](/JavaScript/03_Operator.md)
   - [제어문(Control flow statement)](/JavaScript/04_Control.md)
