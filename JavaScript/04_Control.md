@@ -47,8 +47,8 @@
   // 방법 - 1
   fruit === 'apple' ? console.log('🍎') : console.log('🍊'); // 🍎 출력
   // 방법 - 2
-  let emoji = fruit === 'apple' ? '🍎' : '🍊'; // 🍎 출력
-  console.log(emoji);
+  let emoji = fruit === 'apple' ? '🍎' : '🍊';
+  console.log(emoji); // 🍎 출력
   ```
 
 - `switch`
@@ -235,4 +235,5 @@
   do {
     console.log('do-while 아직 살아있다!');
   } while(isActive2);
+  // do-while 아직 살아있다!
   ```
