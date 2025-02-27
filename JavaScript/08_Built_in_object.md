@@ -267,16 +267,16 @@ console.log(text.toLowerCase()); // hello world!
 // 문자열중 특정한 위치의 문자열을 삭제
 console.log(text.substring(0, 2)); // He, 시작 인덱스 부터 끝 인덱스 전까지 반환
 console.log(text.substring(1, 4)); // ell
-console.log(text.slice(2)); // llo world!, 설정 인덱스 부터 잘라낸 후 반환
+console.log(text.slice(2)); // llo world!, 설정 인덱스 전까지 잘라낸 후 반환
 console.log(text.slice(-2)); // d!, 뒤에서부터 설정 인덱스 전까지 잘라낸 후 반환
 
-const space = '     space  '
 // 공백 제거
-console.log(space.trim()); // space
+const space = '     space  '
+console.log(space.trim()); // space, 공백 제거
 
 // 알고리즘에서 많이 사용 ⭐️⭐️⭐️
-const longText = 'Get to the point';
 // 문자열을 특정한 구분자로 끊어서 배열로 반환
+const longText = 'Get to the point';
 console.log(longText.split(' ')); // [ 'Get', 'to', 'the', 'point' ], 공백을 구분자로 끊음
 console.log(longText.split(' ', 2)); // [ 'Get', 'to' ], 특정 갯수 만큼 반환
 
