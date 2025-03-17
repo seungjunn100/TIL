@@ -76,8 +76,6 @@
 
 ## XHTML 1.1
 - XHTML 1.0 Strict의 확장판으로, 추가적인 모듈화 기능을 지원한다.
-  
-<br />
 
   ```html
   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
