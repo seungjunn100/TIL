@@ -11,9 +11,9 @@
 ## HTML5
 - 현재는 대부분의 브라우저가 HTML5의 표준을 준수하고 있기때문에 html이라고만 적어도 해석이 가능하다.
 
-```html
-<!DOCTYPE html>
-```
+  ```html
+  <!DOCTYPE html>
+  ```
 
 
 <br />
@@ -24,23 +24,23 @@
 - HTML 4.01 Strict
   - 최신 웹 표준을 따르고, 오래된 태그나 속성을 허용하지 않는다.
 
-```html
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-```
+  ```html
+  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+  ```
 
 - HTML 4.01 Transitional
   - 오래된 태그와 속성도 허용되며, 현대적인 표준과 호환된다.
 
-```html
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-```
+  ```html
+  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+  ```
   
 - HTML 4.01 Frameset
   - 프레임셋을 사용하는 레이아웃을 지원한다.
 
-```html
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
-```
+  ```html
+  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+  ```
 
 
 <br />
@@ -51,23 +51,23 @@
 - XHTML 1.0 Strict
   - 최신 웹 표준을 따르고, 오래된 태그나 속성을 허용하지 않는다.
 
-```html
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-```
+  ```html
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  ```
 
 - XHTML 1.0 Transitional
   - 오래된 태그와 속성도 허용되며, 현대적인 표준과 호환된다.
 
-```html
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-```
+  ```html
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  ```
 
 - XHTML 1.0 Frameset
   - 프레임셋을 사용하는 레이아웃을 지원한다.
 
-```html
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
-```
+  ```html
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+  ```
 
 
 <br />
@@ -76,10 +76,10 @@
 
 ## XHTML 1.1
 - XHTML 1.0 Strict의 확장판으로, 추가적인 모듈화 기능을 지원한다.
-
-```html
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-```
+<br>
+  ```html
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+  ```
 
 
 <br />
