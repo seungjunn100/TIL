@@ -1,4 +1,4 @@
-## HTML ( Hyper Text Markup Language )
+# HTML ( Hyper Text Markup Language )
 - Hyper Text Markup Language의 약자
   - `Hyper Text`
     - 문서 간의 연결(링크)을 의미하며, 링크에 따라 다양한 문서들로 넘어갈 수 있다.
@@ -69,8 +69,8 @@
 
 - 빈 요소(Void Elements)
   - 종료 태그 없이 단독으로 사용되는 요소
-  - XHTML에서 빈 요소인 경우에는 뒤에 슬래쉬(/)를 넣어줘야지만 브라우저가 Closing tag를 찾지 않고 동작을 하는 형태이다.
-  - HTML5 에서는 빈 요소의 슬래쉬(/) 작성은 자유지만 한가지의 형태로 일관성있게 코드를 작성해야한다.
+  - `XHTML` 에서 빈 요소인 경우에는 뒤에 슬래쉬(/)를 넣어줘야지만 브라우저가 Closing tag를 찾지 않고 동작을 하는 형태이다.
+  - `HTML5` 에서는 빈 요소의 슬래쉬(/) 작성은 자유지만 한가지의 형태로 일관성있게 코드를 작성해야한다.
 ```html
   <hr>
   <br>
@@ -83,10 +83,11 @@
   - Container Tag : 다른 요소를 감싸는 태그
 ```html
   <!-- Element Tag -->
+  <h2>제목입니다</h2>
   <p>이것은 일반 텍스트입니다.</p>
 
   <!-- Container Tag -->
-  <div class="box">
+  <div class="container">
     <h2>제목입니다</h2>
     <p>이것은 일반 텍스트입니다.</p>
   </div>
@@ -96,7 +97,7 @@
   - 블록 레벨 요소 : 요소 하나당 한 줄을 꽉 차지한다.
   - 인라인 레벨 요소 : 요소의 컨텐츠만큼 자리를 차지한다.
 
-- HTML5 에서는 모두 소문자로 작성하는 것을  권장한다.
+- HTML5 에서는 모두 소문자로 작성하는 것을 권장한다.
 
 
 <br />
@@ -117,22 +118,35 @@
   </html>
 ```
 
-- `<!DOCTYPE>` - [자세히보기](/HTML/02_Doctype.md)
-  - 웹 문서의 형식과 버전을 브라우저에 알려주는 역할을 한다.
-    - 이는 브라우저가 페이지를 올바르게 렌더링하도록 돕는 중요한 요소이다.
-  - HTML5 표준 이전에는 버전을 명시하여 브라우저가 명시된 버전에 맞는 문법으로 해석하였다.
-  - 현재는 대부분의 브라우저가 HTML5의 표준을 준수하고 있기때문에 `<!DOCTYPE html>`이라고만 적어도 해석이 가능하다.
+### `<!DOCTYPE>`
+- 웹 문서의 형식과 버전을 브라우저에 알려주는 역할을 한다.
+  - 이는 브라우저가 페이지를 올바르게 렌더링하도록 돕는 중요한 요소이다.
 
-- `<html lang="ko">`
-  - 페이지 전체의 컨텐츠를 감싸는 최상위(root) 요소
-  - lang 속성 : 문서에서 사용하는 주언어 language 명시
+- HTML5 표준 이전에는 버전을 명시하여 브라우저가 명시된 버전에 맞는 문법으로 해석하였다.
 
-- `<head>` - [자세히보기](/HTML/03_Head.md)
-  - 문서의 메타데이터(웹사이트에 대한 설명)
-  - CSS, script 링크(외부 파일 연결)
+- 현재는 대부분의 브라우저가 HTML5의 표준을 준수하고 있기때문에 `<!DOCTYPE html>`이라고만 적어도 해석이 가능하다.
 
-- `<body>`
-  - 문서의 UI 구성 요소들
+- 만약 `<!DOCTYPE>`을 선언하지 않으면❓
+  - 브라우저는 웹 페이지를 쿼크 모드(Quirks Mode)로 렌더링하게 된다.
+    - 현대적인 웹 표준을 따르지 않고, 과거의 비표준 방식(익스플로러5, 네비게이터4 등 구버전 브라우저와의 호환성 중심)으로 웹 페이지를 처리한다.
+
+  - 발생할 수 있는 문제
+    - CSS가 의도한 대로 적용되지 않을 수 있다.
+    - 일부 JavaScript 기능이 현대적인 방식과 다르게 작동할 수 있다.
+    - 브라우저별 렌더링 차이가 커져, 예상치 못한 결과가 발생할 수 있다.
+    - 웹 페이지가 정상적으로 보이지 않을 경우 문제를 추적하기 어려워진다.
+
+### `<html lang="ko">`
+- 페이지 전체의 컨텐츠를 감싸는 최상위(root) 요소
+- lang 속성 : 문서에서 사용하는 주언어 language 명시
+
+### `<head>`
+- 문서의 메타데이터(웹사이트에 대한 설명)
+- CSS, script 링크(외부 파일 연결)
+- [`<head>`에 들어가는 태그](/HTML/03_Head.md)
+
+### `<body>`
+- 문서의 UI 구성 요소들
 
 
 <br />
@@ -140,8 +154,6 @@
 
 
 ## 참고 사이트
-  - [HTML](https://developer.mozilla.org/ko/docs/Learn/HTML/Introduction_to_HTML/Getting_started)
+- <a href="https://developer.mozilla.org/ko/docs/Web/HTML/Element" target="_blank">HTML Element</a> - MDN HTML 요소 참고
 
-  - [HTML Element](https://developer.mozilla.org/ko/docs/Web/HTML/Element)
-
-  - [HTML Standard](https://html.spec.whatwg.org/) - 예제를 통한 태그 사용법 참고 ⭐️
+- <a href="https://html.spec.whatwg.org/" target="_blank">HTML Standard</a> - 예제를 통한 태그 사용법 참고 ⭐️
