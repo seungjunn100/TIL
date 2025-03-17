@@ -71,26 +71,26 @@
   - 종료 태그 없이 단독으로 사용되는 요소
   - XHTML에서 빈 요소인 경우에는 뒤에 슬래쉬(/)를 넣어줘야지만 브라우저가 Closing tag를 찾지 않고 동작을 하는 형태이다.
   - HTML5 에서는 빈 요소의 슬래쉬(/) 작성은 자유지만 한가지의 형태로 일관성있게 코드를 작성해야한다.
-```html
-  <hr>
-  <br>
-  <img src="image.jpg" alt="이미지 설명">
-  <meta charset="UTF-8">
-```
+  ```html
+    <hr>
+    <br>
+    <img src="image.jpg" alt="이미지 설명">
+    <meta charset="UTF-8">
+  ```
 
 - Element Tag와 Container Tag
   - Element Tag : 기본 요소를 나타내는 태그
   - Container Tag : 다른 요소를 감싸는 태그
-```html
-  <!-- Element Tag -->
-  <p>이것은 일반 텍스트입니다.</p>
-
-  <!-- Container Tag -->
-  <div class="box">
-    <h2>제목입니다</h2>
+  ```html
+    <!-- Element Tag -->
     <p>이것은 일반 텍스트입니다.</p>
-  </div>
-```
+
+    <!-- Container Tag -->
+    <div class="box">
+      <h2>제목입니다</h2>
+      <p>이것은 일반 텍스트입니다.</p>
+    </div>
+  ```
 
 - 블록(Block)과 인라인(Inline)
   - 블록 레벨 요소 : 요소 하나당 한 줄을 꽉 차지한다.
