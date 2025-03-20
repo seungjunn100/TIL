@@ -3,39 +3,9 @@
   - `Cascading`
     - 폭포 같은, 연속 되는, 우선순위가 있는..
   - `Style Sheets`
-    -  스타일 시트
+    -  스타일 문서
 
 - 웹 페이지의 디자인과 레이아웃을 정의하는 스타일링 언어이다.
-
-
-<br />
-<br />
-
-
-## CSS 사용 방식
-- 태그 안에 style 속성을 사용한 `Inline` 방식
-  ```html
-  <div style="color: pink; font-size: 26px;"></div>
-  ```
-
-- HTML 파일 안에 `<style>` 태그 안에 작성
-  ```html
-  <head>
-      <style>
-          div {
-            color: pink;
-            font-size: 26px;
-          }
-      </style>
-  </head>
-  ```
-  
-- CSS 파일에 작성 후 HTML 파일에서 `<link>` 
-  ```html
-  <head>
-      <link rel="stylesheet" href="style.css" />
-  </head>
-  ```
 
 
 <br />
@@ -62,7 +32,7 @@
   #header { text-align: center; }
   ```
 
-- 복합 선택자
+- 결합 선택자
   ```css
   /* 하위 선택자 */
   div p { color: green; }
@@ -70,6 +40,44 @@
   /* 그룹 선택자 */
   h1, h2, h3 { font-family: Arial; }
   ```
+
+- [다양한 선택자 자세히보기](/CSS/02_Seletor.md)
+
+
+<br />
+<br />
+
+
+## CSS 사용 방식
+- 태그 안에 style 속성을 사용한 `Inline` 방식
+  ```html
+  <div style="color: pink; font-size: 26px;"></div>
+  ```
+
+- HTML 파일 안에 `<style>` 태그 안에 작성
+  ```html
+  <head>
+      <style>
+          div {
+            color: pink;
+            font-size: 26px;
+          }
+      </style>
+  </head>
+  ```
+  
+- CSS 파일에 작성 후 HTML 파일에서 `<link>`로 연결하는 방식 - 추천 방식⭐️
+  ```html
+  <head>
+      <link rel="stylesheet" href="style.css" />
+  </head>
+  ```
+  - 한 번 수정하면 여러 HTML 파일에 적용되어 유지보수에 용이
+  - 같은 CSS를 여러 페이지에서 활용 가능하여 재사용성 향상
+  - CSS 파일이 다운로드되어 브라우저 캐시에 저장되 웹페이지 로딩 속도 향상
+  - HTML 코드가 깔끔해지고 관리하기 쉬워 가독성이 향상
+  - HTML 파일이 가볍고 깨끗해지므로, 검색 엔진이 HTML을 분석하는 속도가 빨라져 SEO 개선
+  - 여러 CSS 파일을 모듈화하여 사용 가능
 
 
 <br />
