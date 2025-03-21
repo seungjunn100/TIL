@@ -154,6 +154,6 @@
 
 
 ## 참고 사이트
-- <a href="https://developer.mozilla.org/ko/docs/Web/HTML/Element" target="_blank">HTML Element</a> - MDN HTML 요소 참고
+- <a href="https://developer.mozilla.org/ko/docs/Web/HTML/Element" target="_blank">HTML Element - MDN</a>
 
 - <a href="https://html.spec.whatwg.org/" target="_blank">HTML Standard</a> - 예제를 통한 태그 사용법 참고 ⭐️

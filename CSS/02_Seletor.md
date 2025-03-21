@@ -14,6 +14,8 @@
 
 
 ## 결합 선택자
+- 그룹 선택자
+  - `h1, h2, h3, h4`
 - 후손 선택자 
   - `div p`
 
@@ -32,16 +34,22 @@
 
 
 ## 속성 선택자
-- 기본 속성 선택자 
+- 특정 속성을 갖고있는 선택자
+  - `[disabled]`
+
+- 특정 속성값과 일치하는 선택자
   - `input[type="text"]`
 
-- 부분 속성 선택자
-  - 속성값이 특정 값으로 시작하는 경우 `^=`
-    - `a[href^="https://"]`
-  - 속성값이 특정 값으로 끝나는 경우 `$=`
-    - `img[src$=".png"]`
-  - 속성값이 특정 값을 포함하는 경우 `*=`
-    - `div[class*="main"]`
+- 속성값이 특정 값으로 시작하는 경우 `^=`
+  - `a[href^="https://"]`
+
+- 속성값이 특정 값으로 끝나는 경우 `$=`
+  - `img[src$=".png"]`
+
+- 속성값이 특정 값을 포함하는 경우 `*=`
+  - `div[class*="main"]`
+
+- <a href="https://developer.mozilla.org/ko/docs/Web/CSS/Attribute_selectors" target="_blank">더 다양한 속성 선택자 - MDN</a>
 
 
 <br />
@@ -49,6 +57,7 @@
 
 
 ## 의사(가상) 클래스
+📌 요소의 위치나 상태에 따라 선택 <br>
 📌 `:`는 의사 클래스를 나타낸다.
 - 구조 의사 클래스
   - `:first-child`
@@ -101,7 +110,7 @@
   - `:lang(language)`
     - 특정 언어 속성을 가진 요소를 선택한다.
 
-- [더 다양한 의사 클래스 - MDN](https://developer.mozilla.org/ko/docs/Web/CSS/Pseudo-classes)
+- <a href="https://developer.mozilla.org/ko/docs/Web/CSS/Pseudo-classes" target="_blank">더 다양한 의사 클래스 - MDN</a>
 
 
 <br />
@@ -109,6 +118,7 @@
 
 
 ## 의사(가상) 요소
+📌 요소 안에 가상의 부분을 생성하거나 내용을 선택 <br>
 📌 `::`는 의사 요소를 나타낸다.
 - `::before`
   - 선택된 요소 내용의 시작 부분에 가상 요소를 생성한다.
@@ -131,7 +141,7 @@
 - `::placeholder`
   - `<input>`, `<textarea>` 요소의 `placeholder` 텍스트에 스타일을 적용한다.
 
-- [더 다양한 의사 요소 - MDN](https://developer.mozilla.org/ko/docs/Web/CSS/Pseudo-elements)
+- <a href="https://developer.mozilla.org/ko/docs/Web/CSS/Pseudo-elements" target="_blank">더 다양한 의사 요소 - MDN</a>
 
 
 <br />
@@ -139,4 +149,4 @@
 
 
 ## 게임을 활용한 선택자 공부법
-- [CSS Diner - Where we feast on CSS Selectors!](https://flukeout.github.io/)
+- <a href="https://flukeout.github.io/" target="_blank">CSS Diner - Where we feast on CSS Selectors!</a>

@@ -14,14 +14,11 @@
 
 ## CSS 기본 구조
 - CSS 규칙은 선택자(Selector), 속성(Property), 값(Value)으로 구성됩니다.
-  ```
+  ```css
   선택자 {
     속성: 값;
   }
-  ```
 
-- 기본 선택자
-  ```css
   /* 태그 선택자 */
   p { color: pink; }
   
@@ -30,10 +27,7 @@
   
   /* 아이디(id) 선택자 */
   #header { text-align: center; }
-  ```
 
-- 결합 선택자
-  ```css
   /* 하위 선택자 */
   div p { color: green; }
   
@@ -41,7 +35,7 @@
   h1, h2, h3 { font-family: Arial; }
   ```
 
-- [다양한 선택자 자세히보기](/CSS/02_Seletor.md)
+- [선택자의 여러 종류](/CSS/02_Seletor.md)
 
 
 <br />

@@ -55,9 +55,9 @@
 
 ```html
 <body> <!-- font-size: 14px; -->
-  <div class="outBox"> <!-- font-size: 1.2em; => font-size: 16.8px; -->
+  <div class="outBox"> <!-- font-size: 16.8px; -->
 
-    <div class="inBox"> <!-- font-size: 1.2em; => font-size: 20.16px; -->
+    <div class="inBox"> <!-- font-size: 20.16px; -->
     </div>
 
   </div>
