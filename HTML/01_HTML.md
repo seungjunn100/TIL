@@ -1,5 +1,5 @@
-# HTML ( Hyper Text Markup Language )
-- Hyper Text Markup Language의 약자
+# HTML
+- `Hyper Text Markup Language`의 약자
   - `Hyper Text`
     - 문서 간의 연결(링크)을 의미하며, 링크에 따라 다양한 문서들로 넘어갈 수 있다.
   - `Markup Language`
@@ -118,6 +118,8 @@
   </html>
 ```
 
+<br>
+
 ### `<!DOCTYPE>`
 - 웹 문서의 형식과 버전을 브라우저에 알려주는 역할을 한다.
   - 이는 브라우저가 페이지를 올바르게 렌더링하도록 돕는 중요한 요소이다.
@@ -136,24 +138,20 @@
     - 브라우저별 렌더링 차이가 커져, 예상치 못한 결과가 발생할 수 있다.
     - 웹 페이지가 정상적으로 보이지 않을 경우 문제를 추적하기 어려워진다.
 
+<br>
+
 ### `<html lang="ko">`
 - 페이지 전체의 컨텐츠를 감싸는 최상위(root) 요소
 - lang 속성 : 문서에서 사용하는 주언어 language 명시
+
+<br>
 
 ### `<head>`
 - 문서의 메타데이터(웹사이트에 대한 설명)
 - CSS, script 링크(외부 파일 연결)
 - [`<head>`에 들어가는 태그](/HTML/03_Head.md)
 
+<br>
+
 ### `<body>`
 - 문서의 UI 구성 요소들
-
-
-<br />
-<br />
-
-
-## 참고 사이트
-- <a href="https://developer.mozilla.org/ko/docs/Web/HTML/Element" target="_blank">HTML Element - MDN</a>
-
-- <a href="https://html.spec.whatwg.org/" target="_blank">HTML Standard</a> - 예제를 통한 태그 사용법 참고 ⭐️

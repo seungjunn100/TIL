@@ -89,20 +89,22 @@
 ### OG (Open Graph Data)
 - Facebook에서 만들었으며 웹 사이트에 더 풍부한 메타 데이터를 제공하기 위해 발명하였다.
 ```html
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="BBaek’s record">
-<meta name="twitter:description" content="BBaek’s record">
-<meta name="twitter:image" content="https://example.com/image.jpg">
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com" />
+<meta property="og:title" content="BBaek’s record" />
+<meta property="og:description" content="BBaek’s record" />
+<meta property="og:image" content="https://example.com/image.jpg" />
 ```
 
 <br />
 
 ### Twitter 카드
-- Facebook에서 만들었으며 웹 사이트에 더 풍부한 메타 데이터를 제공하기 위해 발명하였다.
+- Twitter는 별도의 메타 태그를 사용하고 있다.
 ```html
-<meta property="og:title" content="BBaek’s record" />
-<meta property="og:url" content="https://example.com" />
-<meta property="og:image" content="https://example.com/image.jpg" />
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BBaek’s record">
+<meta name="twitter:description" content="BBaek’s record">
+<meta name="twitter:image" content="https://example.com/image.jpg">
 ```
 
 <br />
@@ -118,7 +120,8 @@
 <br />
 
 
-## `<link>` 태그
+## 외부 링크
+### `<link>` 태그
 - favicon
 ```html
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
@@ -129,12 +132,9 @@
 <link rel="stylesheet" href="css/style.css" />
 ```
 
-
-<br />
 <br />
 
-
-## `<script>` 태그
+### `<script>` 태그
 - Javascript
 ```html
 <script src="js/script.js"></script>
