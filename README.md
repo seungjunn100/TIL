@@ -5,7 +5,7 @@
 <br>
 
 ### 🌐 Web
-- [웹 표준, 웹 접근성, 웹 호환성](/Web/01_Web.md)
+- [웹 표준, 웹 접근성, 웹 호환성](/Web/01_Standards_Accessibility.md)
 - [검색 엔진 최적화 (SEO)](/Web/02_SEO.md)
 - [브라우저 렌더링 과정](/Web/03_Browser_Rendering.md)
 - [CDN (Content Delivery Network)](/Web/04_CDN.md)
