@@ -39,11 +39,27 @@
 
 
 ## 웹 접근성 ( Web Accessibility )
-- 웹 페이지를 만들 때 모든 사용자가 쉽게 접근할 수 있도록 웹 접근성을 고려해야 한다.
+-  모든 사람이 웹사이트나 웹 애플리케이션에 접근하고, 이해하고, 탐색하며, 상호작용할 수 있도록 보장하는 원칙과 실천을 말한다.
+
+- 웹 표준과 마찬가지로 W3C에서 정한 WCAG는 웹 접근성을 개선하기 위한 국제 표준 가이드라인이다.
 
 <br>
 
 ### 웹 접근성이 중요한 이유
+- 모두를 위한 포용성
+  - 시각 장애인, 색각 이상자, 노인, 일시적 장애를 가진 사용자, 느린 인터넷 환경, 다양한 디바이스 환경의 사용자 등 모든 사람이 웹을 사용할 수 있어야 한다.
+  - 모두가 동등하게 정보에 접근할 권리를 가지도록 보장해야 한다.
+
+- 법적 요구사항
+  - 미국의 ADA법, 한국의 장애인차별금지법, 공공기관의 KWCAG 준수 의무 등 웹접근성은 많은 나라에서 법적으로 요구되고 있다.
+  - 웹접근성이 미흡할 경우, 법적 제재나 벌금을 받을 수 있다.
+
+- 사용자 수 확대
+  - 웹접근성을 지키면 더 많은 사용자가 웹을 사용할 수 있어 시장 확대로 이어진다.
+  - 검색엔진 최적화(SEO)에도 긍정적인 효과가 있어 유입 증가에도 기여한다.
+    - 접근성 좋은 웹은 사용자 만족도가 높고, 구글 크롤러가 잘 읽기 때문에 SEO 측면에서도 이득이다.
+
+- 
 
 
 <br />
@@ -51,7 +67,6 @@
 
 
 ## 웹 표준과 웹 접근성을 준수하는 방법
-### `HTML`에서 준수하는 방법
 - DOCTYPE 선언 필수
   - 표준모드로 렌더링할 수 있게 해준다.
   ```html
@@ -121,9 +136,6 @@
   - 작성한 HTML이 웹 표준에 맞게 작성되었는지 검사할 수 있다.
   - <a href="https://validator.w3.org/" target="_blank">W3C Validator</a>
 
-<br />
-
-### `CSS`에서 준수하는 방법
 - 스타일과 구조 분리
   - HTML에 인라인 스타일 사용 ❌
   - 스타일은 CSS에만 작성하고, 구조는 HTML에만 작성하는 게 웹 표준 방식이다.
@@ -187,9 +199,6 @@
   - 작성한 CSS가 웹 표준에 맞게 작성되었는지 검사할 수 있다.
   - <a href="https://jigsaw.w3.org/css-validator/" target="_blank">W3C CSS Validator</a>
 
-<br />
-
-### `JavaScript`에서 준수하는 방법
 - 표준 DOM API 사용하기
   - 웹 표준에 맞는 DOM 접근 방식을 사용하는 게 기본이다.
   - `addEventListener`는 이벤트를 여러 개 등록할 수 있어서 더 유연하고, 최신 브라우저에서도 일관되게 작동한다.
@@ -309,6 +318,7 @@
 
 ## 참고 사이트
 - <a href="https://www.w3.org/" target="_blank">W3C</a>
+- <a href="https://a11y.gitbook.io/wcag/international-standards" target="_blank">WCAG</a>
 - <a href="https://developer.mozilla.org/" target="_blank">MDN Web Docs</a>
 - <a href="https://whatwg.org/" target="_blank">WHATWG</a>
 - <a href="https://nuli.navercorp.com/education" target="_blank">NULI - 접근성 교육</a>
