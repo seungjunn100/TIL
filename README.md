@@ -14,8 +14,8 @@
 
 ## 🌐 WEB
 
-- [**웹표준**과 **웹접근성**](./web/01-Std-A11y.md)
-- [**웹접근성**을 위한 **WAI-ARIA**](./web/02-WAI-ARIA.md)
+- [웹표준과 웹접근성](./web/01-Std-A11y.md)
+- [웹접근성을 위한 WAI-ARIA](./web/02-WAI-ARIA.md)
 
 
 
@@ -47,9 +47,10 @@
 
 ## 🔧 JavaScript
 
-- [**JavaScript**란 무엇인가](./javascript/01-JavaScript.md)
-- [**변수**와 **데이터 타입** (feat. **메모리**)](./javascript/02-Variable-DataType.md)
-- [**연산자(Operators)**](./javascript/03-Operators.md)
+- [JavaScript란 무엇인가](./javascript/01-JavaScript.md)
+- [변수와 데이터 타입(feat. 메모리)](./javascript/02-Variable-DataType.md)
+- [연산자(Operators)](./javascript/03-Operators.md)
+- [제어문(Control flow statement)](./javascript/)
 
 
 
@@ -61,8 +62,8 @@
 
 ## 📜 Git
 
-- [**Git**을 활용한 **버전 관리**](./git/01-Git-Version-Control.md)
-- [**Git** 환경 설정](./git/02-Git-Config.md)
+- [Git을 활용한 버전 관리](./git/01-Git-Version-Control.md)
+- [Git 환경 설정](./git/02-Git-Config.md)
 
 
 
@@ -74,7 +75,7 @@
 
 ## 🧩 Node
 
-- [**Node.js**와 **관리 도구들**](./node/01-Node.md)
+- [Node.js와 관리 도구들](./node/01-Node.md)
 
 
 
@@ -86,4 +87,4 @@
 
 ## ⚙️ ETC
 
-- [**Shell**과 **CLI**](./etc/CLI.md)
+- [Shell과 CLI](./etc/CLI.md)
