@@ -332,9 +332,10 @@ console.log(apple); // { name: 'apple', color: 'red', display: '🍎' }
   - Symbol
 
 - `참조(Reference)` 타입
-  - object ( Array )
-  - function
-  - 원시 타입을 제외한 모든 타입
+  - object
+    - Array
+    - function
+    - 원시 타입을 제외한 모든 타입
 
 <br />
 
