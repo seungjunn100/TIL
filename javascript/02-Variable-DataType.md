@@ -7,10 +7,10 @@
   - [var](#var)
   - [let](#let)
   - [const](#const)
-  - [변수와 메모리](#변수와-메모리)
   - [식별자 명명 규칙](#식별자-명명-규칙)
 - [리터럴 ( Literal )](#리터럴--literal)
 - [데이터 타입 ( Data Type )](#데이터-타입--data-type)
+  - [데이터 타입과 메모리](#데이터-타입과-메모리)
   - [number : 숫자](#number--숫자)
   - [BigInt : 큰 정수](#bigint--큰-정수)
   - [string : 문자열](#string--문자열)
@@ -335,6 +335,14 @@ console.log(apple); // { name: 'apple', color: 'red', display: '🍎' }
   - object ( Array )
   - function
   - 원시 타입을 제외한 모든 타입
+
+<br />
+
+### 데이터 타입과 메모리
+
+`원시(Primitive)` 타입은 변수가 어디에 선언되었는지에 따라 메모리의 `Data` 또는 `Stack` 영역에 저장된다. 전역 변수로 선언된 경우 `Data` 영역에 저장되고, 지역 변수로 선언된 경우 `Stack` 영역에 저장된다.
+
+`객체(Object)` 타입은 여러 데이터를 묶어서 보관할 수 있기 때문에 사이즈가 정해져 있지 않다. 즉, 하나의 메모리 셀 안에 모두 담을 수 없기 때문에 메모리 관리가 유연한 `Heap` 영역에 저장된다.
 
 <br />
 
