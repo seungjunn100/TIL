@@ -51,6 +51,10 @@
 - [변수와 데이터 타입(feat. 메모리)](./javascript/02-Variable-DataType.md)
 - [연산자(Operators)](./javascript/03-Operators.md)
 - [제어문(Control flow statement)](./javascript/04-Control-flow-statement.md)
+<!-- - [객체(Object)](./javascript/05-Object.md)
+- [배열(Array)](./javascript/06-Array.md) -->
+- [함수(Function)](./javascript/07-Function.md)
+- [호이스팅(Hoisting)](./javascript/08-Hoisting.md)
 
 
 
