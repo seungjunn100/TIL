@@ -13,6 +13,7 @@
   - [Function 생성자 함수](#function-생성자-함수)
   - [IIFE(Immediately-Invoked Function Expressions)](#iifeimmediately-invoked-function-expressions)
 - [일급 객체 ( First-Class Object )](#일급-객체--first-class-object)
+  - [재귀 함수](#재귀-함수)
   - [콜백 함수](#콜백-함수)
   - [고차 함수](#고차-함수)
 
