@@ -20,6 +20,9 @@
   - [Symbol : 고유한 값](#symbol--고유한-값)
   - [참조 ( Reference ) 타입](#참조--reference--타입)
 - [값과 참조의 차이](#값과-참조의-차이)
+  - [Call by Value](#call-by-value)
+  - [Call by Reference](#call-by-reference)
+  - [원시 타입과 참조 타입의 차이](#원시-타입과-참조-타입의-차이)
 
 
 
@@ -343,7 +346,7 @@ console.log(apple); // { name: 'apple', color: 'red', display: '🍎' }
 
 `원시(Primitive)` 타입은 변수가 어디에 선언되었는지에 따라 메모리의 `Data` 또는 `Stack` 영역에 저장된다. 전역 변수로 선언된 경우 `Data` 영역에 저장되고, 지역 변수로 선언된 경우 `Stack` 영역에 저장된다.
 
-`객체(Object)` 타입은 여러 데이터를 묶어서 보관할 수 있기 때문에 사이즈가 정해져 있지 않다. 즉, 하나의 메모리 셀 안에 모두 담을 수 없기 때문에 메모리 관리가 유연한 `Heap` 영역에 저장된다.
+`참조(Reference)` 타입은 여러 데이터를 묶어서 보관할 수 있기 때문에 사이즈가 정해져 있지 않다. 즉, 하나의 메모리 셀 안에 모두 담을 수 없기 때문에 메모리 관리가 유연한 `Heap` 영역에 저장된다.
 
 <br />
 
@@ -507,7 +510,7 @@ console.log(greeting1 === greeting2); // false
 
 ### `참조 ( Reference )` 타입
 
-참조 타입 또는 `객체(Object)` 타입이라고도 부른다. 연관있는 데이터 타입을 한번에 묶어서 보관할 수 있는 `복합 데이터` 타입이다.
+참조 타입은 `객체(Object)`를 기반으로 하는 타입이며, 연관있는 데이터 타입을 한번에 묶어서 보관할 수 있는 `복합 데이터` 타입이다.
 
 ```JavaScript
 // Key - Value 형태로 데이터를 보관한다.
@@ -590,6 +593,8 @@ console.log(typeof variable); // symbol
 
 <br />
 
+### Call by Value
+
 `원시(Primitive)` 타입은 `값` 자체가 변수에 들어 있다. 변수를 복사할 땐 `값` 자체가 복사되어 할당된다.
 
 ![원시 타입과 메모리](../src/images/primitive-memory.png)
@@ -601,12 +606,15 @@ let b = a;
 console.log(a); // 1
 console.log(b); // 1
 
+// 재할당하게되면 다른 메모리 주소에 num2의 값이 재할당된다.
 b = 2;
 console.log(a); // 1
 console.log(b); // 2
 ```
 
 <br />
+
+### Call by Reference
 
 `참조(Reference)` 타입은 객체가 저장되어 있는 `참조값(메모리 주소, Reference)`이 변수에 들어 있다. 변수를 복사할 땐 `참조값(메모리 주소, Reference)`이 복사되어 할당된다.
 
@@ -626,3 +634,22 @@ orange.name = 'orange';
 console.log(apple); // { name: 'orange' }
 console.log(orange); // { name: 'orange' }
 ```
+
+<br />
+
+### 원시 타입과 참조 타입의 차이
+
+```javascript
+let num = 100;                // number
+let str = 'hello';            // string
+const arr = [num, str];       // object(array)
+
+console.log(num, str, arr);   // 100, hello, [ 100, 'hello' ]
+
+num = 200;
+str = 'hi';
+
+console.log(num, str, arr);   // 200, hi, [ 100, 'hello' ]
+```
+
+`arr`이 `[num, str]`을 생성할 때, 원시 타입인 `num`과 `str`의 현재 값(100, 'hello') 자체가 복사되어 배열의 요소로 저장된다. 이후 `num`과 `str`에 새로운 값을 재할당하더라도, `arr`의 요소는 이미 값이 복사되어 저장된 상태이므로 영향을 받지 않는다.
