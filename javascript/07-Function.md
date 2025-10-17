@@ -12,6 +12,12 @@
   - [화살표 함수](#화살표-함수)
   - [Function 생성자 함수](#function-생성자-함수)
   - [IIFE(Immediately-Invoked Function Expressions)](#iifeimmediately-invoked-function-expressions)
+- [함수 호출 방식에 결정되는 `this`](#함수-호출-방식에-결정되는-this)
+  - [일반 함수 호출](#일반-함수-호출)
+  - [메서드 호출](#메서드-호출)
+  - [메서드(화살표 함수) 호출](#메서드화살표-함수-호출)
+  - [`apply()`, `call()` 호출](#apply-call-호출)
+  - [함수 내부의 `this`](#함수-내부의-this)
 - [일급 객체 ( First-Class Object )](#일급-객체--first-class-object)
   - [재귀 함수](#재귀-함수)
   - [콜백 함수](#콜백-함수)
@@ -107,64 +113,79 @@ console.log(fullName('이', '몽룡')); // 홍 길동
 매개변수의 기본 값은 무조건 `undefined`이다.
 
 ```JavaScript
-function add(a, b) {
-  console.log(a);
-  console.log(b);
-  return a + b;
+function printNum(num1, num2) {
+  console.log(num1, num2);
 }
-add(); // a = undefined, b = undefined
-add(1, 2); // a = 1, b = 2
+printNum(); // num1 = undefined, num2 = undefined
+printNum(1, 2); // num1 = 1, num2 = 2
+
+
+// 매개변수의 수가 많은 경우
+function printNum(num1, num2, num3) {
+  console.log(num1, num2, num3);
+}
+printNum(1, 2); // num1 = 1, num2 = 2, num3 = undefined
+
+
+// 인자의 수가 많은 경우
+function printNum(num1, num2) {
+  console.log(num1, num2);
+}
+printNum(1, 2, 3); // a = 1, b = 2, 세번 째 인자의 수 3은 처리할 매개변수가 없기 때문에 무시된다.
 ```
 
-매개변수의 정보는 함수 내부에서 접근이 가능한 `arguments` 객체에 저장된다.
+#### Arguments
+
+함수 호출 시 전달되는 모든 인자를 담고 있는 유사 배열 객체이다. 함수 내에서 접근이 가능하고 배열과 비슷하게 `length` 속성과 `index`로 각 인자에 접근이 가능하다.
 
 ```JavaScript
-function add(a, b) {
-  console.log(a);
-  console.log(b);
-  console.log(arguments);
-  console.log(arguments[1]);
-  return a + b;
+function printNum(num1, num2) {
+  console.log(num1, num2, arguments);
 }
-add(1, 2, 3);
-// 1
-// 2
-// [Arguments] { '0': 1, '1': 2, '2': 3 }
-// 2
-// 필요한 값만 매개변수로 들어가고 나머지 인자는 무시된다. 3은 들어갈 매개변수가 없으므로 무시된다.
+
+printNum(); // undefined undefined [Arguments] {  }
+printNum(10); // 10 undefined [Arguments] { '0': 10 }
+printNum(10, 20); // 10 20 [Arguments] { '0': 10, '1': 20 }
+printNum(10, 20, 30, 40); // 10 20 [Arguments] { '0': 10, '1': 20, '2': 30, '3': 40 }
+// 필요한 값만 매개변수로 들어가고 나머지 인자는 무시된다.
 ```
 
 #### 매개변수 기본값
 
-매개변수에 기본 값을 설정할 수 있다.
+매개변수에 기본 값을 설정할 수 있다. `undefined`인 경우에만 기본 값이 할당되며, 인자에 기본 값을 설정한다면 설정한 값으로 할당된다.
 
 ```JavaScript
-function add(a = 1, b = 1) {
-  console.log(a);
-  console.log(b);
-  return a + b;
+function printNum(num1 = 0, num2 = 0) {
+  console.log(num1, num2);
 }
-add(); // 1, 1, undefined인 경우에만 기본 값이 할당된다.
-add(2, 2); // 2, 2, 인자에 값을 설정한다면 설정한 값으로 할당된다.
+
+printNum(); // 0 0
+printNum(10); // 10 0
+printNum(10, 20); // 10 20
 ```
 
 #### Rest Parameters
 
-얼마나 많은 개수의 인자가 전달될지 모를 때, 모든 것들을 배열로 받고 싶을 때 사용한다.
+전달될 인자의 개수가 정해지지 않아 모를 때, 모든 인자를 배열로 전달 받고 싶을 때 사용한다.
 
 ```JavaScript
-function sum(...numbers) {
-  console.log(numbers);
+function printNum(...nums) {
+  console.log(nums);
 }
-sum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10); // [ 1, 2, 3, 4,  5, 6, 7, 8, 9, 10 ]
+printNum(); // []
+printNum(10); // [ 10 ]
+printNum(10, 20); // [ 10, 20 ]
+printNum(10, 20, 30, 40); // [ 10, 20, 30, 40 ]
+
 
 // 부분적으로 매개변수를 설정할 수 있다.
-function sum(a, b, ...numbers) {
-  console.log(a);
-  console.log(b);
-  console.log(numbers);
+function printNum(num1, num2, ...nums) {
+  console.log(num1, num2, nums);
 }
-sum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10); // 1, 2, [ 3, 4, 5, 6, 7, 8, 9, 10 ]
+printNum(); // undefined undefined []
+printNum(10); // 10 undefined []
+printNum(10, 20); // 10 20 []
+printNum(10, 20, 30, 40); // 10 20 [ 30, 40 ]
 ```
 
 <br />
@@ -287,15 +308,280 @@ const add = new Function('x', 'y', 'let result = x + y; return result;');
 즉각적으로 호출이 되는 함수 표현식이다.
 
 ```JavaScript
+const star = '⭐️';
+console.log(star);
+
 // 정의만 해놓고 호출하지 않으면 함수는 실행되지 않는다.
 function run() {
-  console.log('⭐️');
+  const star = '⭐️';
+  console.log(star);
 }
 
 // IIFE 표현식을 통해 바로 호출해서 실행할 수 있다.
 (function run() {
-  console.log('⭐️');
+  const star = '⭐️';
+  console.log(star);
 })(); // ⭐️
+```
+
+`star`의 변수를 함수 안에 두고 지역변수로만 사용하도록 사용하기 위해 사용할 수 있다. 전역 스코프를 오염시키지 않을 수 있다. 일회성 실행이 필요한 코드에 적합
+
+
+
+
+<br />
+<br />
+
+
+
+
+## 함수 호출 방식에 결정되는 `this`
+
+`this`는 함수, 객체, 클래스 내부에서 키워드로 접근 가능하며, 문맥에 따라 `this`가 가르키는 것이 결정된다. 이것을 `this 바인딩`이라고 한다.
+
+<br />
+
+### 일반 함수 호출
+
+```javascript
+// 함수 선언문
+function print() {
+  console.log(this); // 브라우저에서 this는 window 객체
+  window.console.log('window.'); // window. // console은 window 객체의 속성이다.
+  this.console.log('this.'); // this. // 브라우저에서 this는 window 객체
+  console.log('window 생략'); // window 생략 // window 객체는 어디서나 참조 가능하므로 생략 가능
+}
+print();
+
+// 한수 표현식
+const print2 = function () {
+  console.log(this); // 브라우저에서 this는 window 객체
+};
+print2();
+```
+
+<br />
+
+### 메서드 호출
+
+`this`는 메서드를 정의한 객체이다. 생성된 객체를 참조하므로 객체에 종속적인 속성을 부여하는게 가능하다.
+
+```javascript
+const getDogName = function () {
+  return this.dogName;
+};
+
+const firstDog = {
+  dogName: '콩이',
+  age: 12,
+  getName: getDogName
+};
+
+const secondDog = {
+  dogName: '단이',
+  age: 8,
+  getName: getDogName
+};
+
+// 일반 함수 호출
+console.log(getDogName()); // undefined // this = window 객체
+// 일반 함수 호출에서 this는 window 객체를 가르키지만, window 객체에는 dogName의 속성이 없다.
+
+// 메서드 호출
+console.log(firstDog.age, firstDog.getName()); // 12 콩이 // this = firstDog
+console.log(secondDog.age, secondDog.getName()); // 8 단이 // this = secondDog
+```
+
+변수, 배열의 요소, 객체의 프로퍼티에 함수 할당 후 실행해 보면 `this`의 결과가 다르다는 것을 알 수 있다.
+
+```javascript
+// 변수에 선언한 함수 표현식
+const print = function () {
+  console.log(this);
+};
+print(); // this = window 객체
+
+// 배열의 요소에 함수 할당
+const arr = [print];
+arr[0](); // this = arr
+
+// 객체의 속성에 함수 할당
+const obj = {
+  printThis: print
+};
+obj.printThis(); // this = obj
+```
+
+<br />
+
+### 메서드(화살표 함수) 호출
+
+화살표 함수는 함수 내부에 `arguments`와 `this`가 생성되지 않고, 상위 컨텍스트의 `arguments`와 `this`를 사용하게 된다.
+
+```javascript
+// 상위 컨텍스트의 this
+console.log(this); // window 객체
+
+const getDogName = () => {
+  return this.dogName;
+};
+
+const firstDog = {
+  dogName: '콩이',
+  age: 12,
+  getName: getDogName
+};
+
+const secondDog = {
+  dogName: '단이',
+  age: 8,
+  getName: getDogName
+};
+
+// 일반 함수 호출
+console.log(getDogName()); // undefined // this = window 객체
+
+// 메서드 호출
+console.log(firstDog.age, firstDog.getName()); // 12 undefined // this = window 객체
+console.log(secondDog.age, secondDog.getName()); // 8 undefined // this = window 객체
+```
+
+<br />
+
+### `apply()`, `call()` 호출
+
+함수에 정의된 메서드이며, `this`를 명시적으로 지정할 수 있다. `함수명.apply()`, `함수명.call()` 형태로 호출할 수 있다.
+
+#### `apply(param1, param2)`
+
+- 두 개의 매개변수를 가진다.
+- 첫 번째 매개변수(param1)에는 `this`로 사용할 객체를 전달한다.
+- 두 번째 매개변수(param2)에는 함수에 전달할 배열을 전달한다.
+
+`call(param1, param2, param3, ...)`
+
+- 여러 개의 매개변수를 가진다.
+- 첫 번째 매개변수(param1)에는 `this`로 사용할 객체를 전달한다.
+- 두 번째 이후의 매개변수(param2, param3, ...)에는 함수에 전달할 인자값을 차례대로 전달한다.
+
+```javascript
+const add = function (a, b) {
+  console.log(this.name);
+  return a + b;
+};
+
+const hong = {
+  name: '홍',
+  getSum: add
+};
+
+const kong = {
+  name: '콩',
+  getSum: add
+};
+
+console.log(hong.name, hong.getSum.call(kong, 10, 20, 30)); // 홍, 콩 30
+// call 메서드를 사용하여 첫번 째 인자의 this를 kong의 객체로 전달하여 hong.getSum 함수가 실행될 때 this.name은 kong.name의 값이 전달된다.
+// 나머지 인자도 전달되어 함수가 실행될 때 a, b 두개의 매개변수만 존재 하므로 10과 20만 전달 받아 연산되고 나머지 인자는 무시된다.
+
+console.log(kong.name, kong.getSum.apply(hong, [30, 40, 50])); // 콩, 홍 70
+// apply 메서드를 사용하여 첫번 째 인자의 this를 hong의 객체로 전달하여 kong.getSum 함수가 실행될 때 this.name은 hong.name의 값이 전달된다.
+// 두번 째 인자도 전달되어 함수가 실행될 때 a, b 두개의 매개변수만 존재 하므로 30과 40만 전달 받아 연산되고 배열의 나머지 요소는 무시된다.
+```
+
+<br />
+
+### 함수 내부의 `this`
+
+함수 내부의 `this`가 상위 스코프의 `this`를 참조하지 못하고 함수 자신의 `this`를 참조하는 경우로써, `visit2`는 호출 주체가 없는 일반 함수로 호출하여 `this`는 `window 객체`를 가르키게 된다.
+
+```javascript
+var count = 0; // window.count = 2;
+
+const myObj = {
+  count: 0,
+  visit: function(){
+    // 방문자를 한명 증가시킨다.
+    this.count++; // this = myObj
+
+    const visit2 = function () {
+      // 방문자를 한명 증가시킨다.
+      this.count++; // this = window
+    };
+
+    visit2();
+  },
+};
+
+myObj.visit(); // this = myObj
+myObj.visit(); // this = myObj
+console.log('방문자수', count); // 방문자수 2
+console.log('방문자수', myObj.count); // 방문자수 2
+```
+
+상위 스코프의 `this`를 참조할 수 있는 다양한 방법들이 있다.
+
+```javascript
+// 임시 변수로 상위 스코프의 this를 참조
+var count = 0; // window.count = 0;
+const myObj = {
+  count: 0,
+  visit: function(){
+    this.count++; // this = myObj
+
+    const that = this; // that = myObj
+
+    const visit2 = function () {
+      that.count++; // that = myObj
+    };
+
+    visit2();
+  },
+};
+myObj.visit(); // this = myObj
+myObj.visit(); // this = myObj
+console.log('방문자수', count); // 방문자수 0
+console.log('방문자수', myObj.count); // 방문자수 4
+
+
+// call을 사용해서 상위 스코프의 this를 내부에 전달
+var count = 0; // window.count = 0;
+const myObj = {
+  count: 0,
+  visit: function(){
+    this.count++; // this = myObj
+
+    const visit2 = function () {
+      this.count++; // this = myObj
+    };
+
+    visit2.call(this);
+  },
+};
+myObj.visit(); // this = myObj
+myObj.visit(); // this = myObj
+console.log('방문자수', count); // 방문자수 0
+console.log('방문자수', myObj.count); // 방문자수 4
+
+
+// this가 생성되지 않는 화살표 함수 사용
+var count = 0; // window.count = 0;
+const myObj = {
+  count: 0,
+  visit: function(){
+    this.count++; // this = myObj
+
+    const visit2 = () => {
+      this.count++; // this = myObj
+    };
+
+    visit2();
+  },
+};
+myObj.visit(); // this = myObj
+myObj.visit(); // this = myObj
+console.log('방문자수', count); // 방문자수 0
+console.log('방문자수', myObj.count); // 방문자수 4
 ```
 
 
@@ -387,6 +673,35 @@ console.log(factorial(5)); // 120
 **나중에 호출해주는 함수**를 뜻하며, 다른 함수에게 매개변수로 전달되어 나중에 실행되는 함수를 의미한다.
 
 ```javascript
+function sendData(data, cb) {
+  // data를 서버에 전송한다.
+  // ......
+  cb();
+}
+
+const newPing = { 
+  name: '새로핑', 
+  age: 7 
+};
+sendData(newPing, () => {
+  console.log('회원 가입 완료'); // sendData 함수의 작업 완료 후에 호출
+});
+
+const newPost = {
+  title: '콜백 함수란', 
+  writer: '진지핑'
+};
+sendData(newPost, () => {
+  console.log('게시글 작성 완료'); // sendData 함수의 작업 완료 후에 호출
+});
+
+/*
+  데이터를 서버에 전송하면 그 내용에 따라 받는 콜백 함수가 다르다.
+  newPing이라는 데이터를 서버에 보내면 콜백 함수로 회원 가입 완료라는 함수를 호출할 수 있다.
+*/
+```
+
+```javascript
 // setTimeout() 함수는 지정한 시간(밀리초)이 지난 뒤에 전달된 콜백 함수를 실행하는 고차 함수이다.
 setTimeout(function () {
   console.log('3초 후에 실행!');
@@ -448,3 +763,53 @@ console.log(outcome); // undefined
 
 
 ## 불변성(Immutability) -->
+
+
+
+
+
+
+
+
+
+
+배열, 함수를 넣어서 확인
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)
+console.dir(); // 속성, 메서드(프로토타입)

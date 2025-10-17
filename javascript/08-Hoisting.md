@@ -50,9 +50,8 @@ let b; // 선언만 되고 초기화되기 전에 TDZ 상태가 된다.
 
 // TDZ(Temporal Dead Zone) ~
 b = ...
-// ~ TDZ(Temporal Dead Zone)
-
 console.log(b); // Cannot access 'b' before initialization
+// ~ TDZ(Temporal Dead Zone)
 
 b = 20;
 console.log(b); // 20

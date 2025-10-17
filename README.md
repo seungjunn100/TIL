@@ -55,6 +55,9 @@
 - [배열(Array)](./javascript/06-Array.md) -->
 - [함수(Function)](./javascript/07-Function.md)
 - [호이스팅(Hoisting)](./javascript/08-Hoisting.md)
+- [프로토타입(Prototype)](./javascript/09-Prototype.md)
+- [클래스(Class)](./javascript/10-Class.md)
+- [클로저(Closure)](./javascript/11-Closure.md)
 
 
 
