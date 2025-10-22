@@ -51,13 +51,20 @@
 - [변수와 데이터 타입(feat. 메모리)](./javascript/02-Variable-DataType.md)
 - [연산자(Operators)](./javascript/03-Operators.md)
 - [제어문(Control flow statement)](./javascript/04-Control-flow-statement.md)
-<!-- - [객체(Object)](./javascript/05-Object.md)
-- [배열(Array)](./javascript/06-Array.md) -->
+- [🚧 객체(Object)](./javascript/05-Object.md)
+- [🚧 배열(Array)](./javascript/06-Array.md)
 - [함수(Function)](./javascript/07-Function.md)
 - [호이스팅(Hoisting)](./javascript/08-Hoisting.md)
-- [프로토타입(Prototype)](./javascript/09-Prototype.md)
-- [클래스(Class)](./javascript/10-Class.md)
-- [클로저(Closure)](./javascript/11-Closure.md)
+- [🚧 스코프(Scope)](./javascript/09-Scope.md)
+- [🚧 렉시컬 환경(Lexical Environtment)](./javascript/10-Lexical-Environtment.md)
+- [🚧 클로저(Closure)](./javascript/11-Closure.md)
+- [프로토타입(Prototype)](./javascript/12-Prototype.md)
+- [클래스(Class)](./javascript/13-Class.md)
+
+### 브라우저와 Web APIs
+
+- [🚧 DOM(Document Object Model)](./javascript/browser/01-DOM.md)
+- [🚧 이벤트]()
 
 
 
