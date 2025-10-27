@@ -11,24 +11,24 @@
   - [자식 노드 탐색 접근](#자식-노드-탐색-접근)
   - [부모 노드 탐색 접근](#부모-노드-탐색-접근)
   - [형제 노드 탐색 접근](#형제-노드-탐색-접근)
-- [요소 노드 내부 텍스트 제어]()
-  - [nodeValue]()
-  - [textContent]()
-  - [innerText]()
-  - [innerHTML]()
-  - [outerHTML]()
-  - [insertAdjacentHTML]()
-- [DOM 컨텐츠 제어]()
-  - [노드 생성]()
-  - [노드 추가]()
-  - [노드 삽입]()
-  - [노드 이동]()
-  - [노드 교체]()
-  - [노드 삭제]()
-  - [노드 복사]()
-- [속성(Attribute) 제어]()
-- [스타일(Style) 제어]()
-- [DOM 표준]()
+- [요소 노드 내부 컨텐츠 제어](#요소-노드-내부-컨텐츠-제어)
+  - [nodeValue](#nodevalue)
+  - [textContent](#textcontent)
+  - [innerText](#innertext)
+  - [innerHTML](#innerhtml)
+  - [outerHTML](#outerhtml)
+  - [insertAdjacentHTML(position, string)](#insertadjacenthtmlposition-string)
+- [DOM 제어](#dom-제어)
+  - [노드 생성](#노드-생성)
+  - [노드 추가, 삽입, 이동](#노드-추가-삽입-이동)
+  - [노드 교체](#노드-교체)
+  - [노드 삭제](#노드-삭제)
+  - [노드 복사](#노드-복사)
+- [속성(Attribute) 제어](#속성attribute-제어)
+- [스타일(Style) 제어](#스타일style-제어)
+  - [인라인 스타일 제어](#인라인-스타일-제어)
+  - [클래스(class) 제어](#클래스class-제어)
+  - [모든 CSS 스타일 확인](#모든-css-스타일-확인)
 
 
 
@@ -738,69 +738,394 @@ console.log(firstLi); // <li>두부 <span>순두부</span></li>
 
 
 
-## DOM 컨텐츠 제어
+## DOM 제어
 
+새로운 노드를 생성하여 **DOM을 제어**할 수 있다. DOM을 제어해 새로운 노드를 추가하거나 삭제하면 **리플로우와 리페인트가 발생하여 성능에 영향**을 준다. 성능 최적화를 위해 주의해서 다루는게 좋다.
 
+<br />
 
+### 노드 생성
 
+`createElement(tagName)` : 지정한 태그명으로 **요소 노드를 생성**한다.
 
+`createTextNode(text)` : 지정한 내용으로 **텍스트 노드를 생성**한다.
 
+`createAttribute(attributeName)` : 지정한 속성명으로 **속성 노드를 생성**한다.
 
+```javascript
+// <li> 요소 노드 생성
+const elemNode = document.createElement('li');
 
+// '아이언맨' 텍스트 노드 생성
+const textNode = document.createTextNode('아이언맨');
 
+// 'class' 속성 노드 생성
+const attrNode = document.createAttribute('class');
+```
 
+<br />
 
+### 노드 추가, 삽입, 이동
 
+`요소노드.appendChild(Node)` : 지정한 노드를 요소 노드의 **마지막 자식 노드로 추가**한다.
 
+`요소노드.insertBefore(Node, targetNode)` : 추가할 노드(Node)를 요소 노드의 자식중 **지정한 노드의 앞에 삽입**한다.
 
+```html
+<ul id="movies" class="list">
+  <li>어벤저스</li>
+  <li>다크나이트</li>
+  <li>미션임파서블</li>
+</ul>
+```
+
+```javascript
+const movieList = document.querySelector('#movies');
+const elemNode = document.createElement('li');
+const textNode = document.createTextNode('아이언맨');
+
+// appendChild - 추가
+elemNode.appendChild(textNode); // <li>아이언맨</li>
+movieList.appendChild(elemNode);
+/*
+<ul id="movies" class="list">
+  <li>어벤저스</li>
+  <li>다크나이트</li>
+  <li>미션임파서블</li>
+  <li>아이언맨</li>
+</ul>
+*/
+
+// insertBefore - 삽입
+movieList.insertBefore(elemNode, movieList.firstChild);
+/*
+<ul id="movies" class="list">
+  <li>아이언맨</li>
+  <li>어벤저스</li>
+  <li>다크나이트</li>
+  <li>미션임파서블</li>
+</ul>
+*/
+```
+
+`appendChild`로 추가해준 요소 노드가 있고, `insertBefore`로 삽입해준 요소 노드가 있는데 총 2 곳에 추가되는 것이 아닌 위치만 바뀐 채로 나온다. 그 이유는 `elemNode`는 하나의 노드 객체이기 때문에 `DOM tree` 내에서 동시에 두 위치에 존재할 수 없다. 그래서 처음에 `appendChild`로 추가해준 요소노드가 `insertBefore` 메서드로 인해 지정한 위치에 삽입, 즉, `이동`한거라 볼 수 있다.
+
+#### 속성 값을 추가하는 방법
+
+```javascript
+const attrNode = document.createAttribute('class');
+const elemNode = document.createElement('li');
+
+attrNode.value = 'highlight'; // class="highlight"
+elemNode.setAttributeNode(attrNode); // <li class="highlight"></li>
+
+// setAttribute 메서드로 간편하게 가능
+elemNode.setAttribute('class', 'highlight'); // <li class="highlight"></li>
+```
+
+<br />
+
+### 노드 교체
+
+`요소노드.replaceChild(newChild, oldChild)` : 요소 노드의 자식 노드인 `oldChild` 노드를 `newChild` 노드로 **교체**한다.
+
+```html
+<ul id="movies" class="list">
+  <li>어벤저스</li>
+  <li>다크나이트</li>
+  <li>미션임파서블</li>
+</ul>
+```
+
+```javascript
+const movieList = document.querySelector('#movies');
+
+const newChild = document.createElement('li');
+newChild.textContent = '토르'; // <li>토르</li>
+
+const oldChild = movieList.firstElementChild; // <li>어벤저스</li>
+
+movieList.replaceChild(newChild, oldChild);
+/*
+<ul id="movies" class="list">
+  <li>토르</li>
+  <li>다크나이트</li>
+  <li>미션임파서블</li>
+</ul>
+*/
+```
+
+노드를 교체할 때 주의할점이 있다면, **교체할 노드가 요소 노드인지 공백 텍스트 노드인지 정확히 지정**해줘야 한다.
+
+<br />
+
+### 노드 삭제
+
+`요소노드.removeChild(childNode)` : **지정한 자식 노드를 삭제**한다.
+
+`요소노드.remove()` : **자신을 삭제**한다.
+
+```html
+<ul id="movies" class="list">
+  <li>어벤저스</li>
+  <li>다크나이트</li>
+  <li>미션임파서블</li>
+</ul>
+```
+
+```javascript
+const movieList = document.querySelector('#movies');
+
+// <li>다크나이트</li> 자식 노드 삭제
+movieList.removeChild(movieList.firstElementChild.nextElementSibling);
+
+// <li>미션임파서블</li> 자신을 삭제
+movieList.lastElementChild.remove();
+
+console.log(movieList);
+/*
+<ul id="movies" class="list">
+  <li>어벤저스</li>
+</ul>
+*/
+```
+
+<br />
+
+### 노드 복사
+
+`요소노드.cloneNode([deep: true | false])` : **지정한 노드를 복사하여 생성**한다.
+  - 매개변수 deep에 `true`를 전달하면, **모든 자손 노드를 포함**하여 복사 생성한다.
+  - 매개변수 deep에 `false`를 전달하면, **지정한 요소 노드 자신만**을 복사 생성한다.
+  - 기본값은 `false`
+
+```html
+<ul id="movies" class="list">
+  <li>어벤저스</li>
+  <li>다크나이트</li>
+  <li>미션임파서블</li>
+</ul>
+```
+
+```javascript
+const movieList = document.querySelector('#movies');
+const firstLi = movieList.firstElementChild; // <li>어벤저스</li>
+
+// false
+const cloneFalse = firstLi.cloneNode(); // <li></li>
+cloneFalse.textContent = '헐크'; // <li>헐크</li>
+movieList.appendChild(cloneFalse);
+/*
+<ul id="movies" class="list">
+  <li>어벤저스</li>
+  <li>다크나이트</li>
+  <li>미션임파서블</li>
+  <li>헐크</li>
+</ul>
+*/
+
+// true
+const cloneTrue = movieList.cloneNode(true);
+movieList.appendChild(cloneTrue);
+/*
+<ul id="movies" class="list">
+  <li>어벤저스</li>
+  <li>다크나이트</li>
+  <li>미션임파서블</li>
+  <li>헐크</li>
+  <ul id="movies" class="list">
+    <li>어벤저스</li>
+    <li>다크나이트</li>
+    <li>미션임파서블</li>
+    <li>헐크</li>
+  </ul>
+</ul>
+*/
+```
 
 
 
 
 <br />
 <br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
+
+
+
+
+## 속성(Attribute) 제어
+
+`Attribute`는 HTML 요소의 **동작을 제어하기 위한 추가적인 정보를 제공**한다. 그리고 HTML 요소는 여러개의 속성을 가질 수 있다. HTML 문서가 파싱될 때 HTML 요소의 `Attribute`는 `Attribute 노드`로 변환되어 요소 노드와 연결된다. `Attribute`의 갯수만큼 노드가 생성된다.
+
+`Element.getAttribute(attributeName)` : 속성 **값을 참조**한다.
+
+`Element.setAttribute(attributeName, value)` : 속성 **값을 변경**한다.
+
+`Element.hasAttribute(attributeName)` : 속성 **값을 가지고 있는지 확인**한다.
+
+`Element.removeAttribute(attributeName)` : 속성 **값을 제거**한다.
+
+```html
+<a href="https://www.naver.com/">네이버</a>
+
+<img src="https://shop-phinf.pstatic.net/20240829_79/1724913716663qTrqm_PNG/11281302375656299_1436107326.png?type=f320_320" 
+width="160" 
+format="png" 
+data-age="6" 
+data-user-name="user">
+
+<input type="text" name="userName">
+```
+
+```javascript
+// 표준 속성 접근
+console.log(a.href); // https://www.naver.com/
+console.log(img.src); // https://shop-phinf.pstatic.net/202 ... 320
+console.log(img.width); // 160
+console.log(input.type); // text
+console.log(input.name); // userName
+
+// 비표준 속성을 추가해서 사용해도 문제없이 동작은 하지만, 권장되진 않는다.
+console.log(img.format); // undefined, 비표준 속성은 속성에 접근할 수 없다.
+console.log(img.getAttribute('format')); // png, 메서드로 접근할 수 있다.
+
+// 권장되는 표준적인 커스텀 속성을 사용하는 것이 좋다.
+// data-* 속성을 사용
+console.log(img.getAttribute('data-age')); // 6
+console.log(img.getAttribute('data-user-name')); // user
+
+// dataset 객체의 속성으로 접근 가능
+console.log(img.dataset.age); // 6
+console.log(img.dataset.userName); // user
+
+// 속성 추가도 가능
+img.dataset.address = '서울시';
+
+// 속성 값을 가지는지 확인
+console.log(img.hasAttribute('data-address')); // true
+
+// 속성 값을 제거
+img.removeAttribute('data-address');
+console.log(img.hasAttribute('data-address')); // false
+```
+
+
+
+
 <br />
 <br />
 
-브라우저는 웹서버에서 다운로드 받은 텍스트 기반의 HTML 문서를 파싱하면서 HTML 문서의 각 구성 요소를 트리구조의 객체로 만들어 자바스크립트로 제공
-
-객체를 만든다는건 속성과 메서드를 만든다는 것
-
-만약 li 태그로 만든 텍스트 문자를 찾는다면 찾기 어렵다.. 하지만 객체로 접근한다면 손쉽다.
-
-Document -> Object Model -> 브라우저
-
-요소노드는 태그노드를 뜻함
-
-// 단수 복수
-getElementByIdgetElementsByTagName
-
-innerHTML을 많이 쓴다.
-
-Create 회원 가입
-Read 회원 정보
-Update 회원 정보 수정
-Delete 회원 탈퇴
-=> CRUD
 
 
-표준이 아닌 속성은 data- 형식으로 사용하는게 좋다.
-format 같은 것은 표준 속성처럼 보이므로
+
+## 스타일(Style) 제어
+
+요소 노드의 `인라인 스타일`을 제어하거나, CSS class로 미리 작성하여 `class 속성`으로 스타일을 제어할 수 있다. `class 속성`을 사용하면 재사용성과 성능, 유지보수 측면에서 더 좋기 때문에 이 방법을 권장한다.
+
+<br />
+
+### 인라인 스타일 제어
+
+```html
+<div class="box red"><h1>Hello World~!</h1></div>
+```
+
+```javascript
+const box = document.querySelector('.box');
+
+// Element.style : HTML 요소의 인라인 style 정보가 객체로 저장되어 있다.
+console.log(box.style); // CSSStyleDeclaration {accentColor: '', additiveSymbols: '', …}
+
+// Element.style.속성명 형태로 사용한다.
+box.style.color = 'blue'; // 변경
+box.style.width = '100px'; // 추가
+box.style.hight = '100px'; // 추가
+
+// '-' 케밥 케이스는 카멜 케이스로 적용된다.
+box.style.backgroundColor = 'yellow';
+
+// 모든 스타일을 한번에 바꿀 수 있다.
+box.style.cssText = 'color: black; font-size: 24px; background-color: pink;';
+```
+
+<br />
+
+### 클래스(class) 제어
+
+```html
+<div class="box red"><h1>Hello World~!</h1></div>
+```
+
+```javascript
+const box = document.querySelector('.box');
+
+// Element.className : class 값을 공백으로 구분된 문자열로 반환한다.
+console.log(box.className); // box red
+box.className = box.className.replace('red', 'blue'); // 교체 후 반환 값을 다시 대입
+console.log(box.className); // box blue
+
+// Element.classList : class 속성의 정보를 갖는 유사 배열 객체를 반환한다.
+console.log(box.classList); // DOMTokenList(2) ['box', 'blue', value: 'box blue']
+
+// 유용한 메서드들을 제공한다.
+// add(...className) : 1개 이상의 속성 값을 추가한다.
+box.classList.add('foo');
+console.log(box.className); // box blue foo
+box.classList.add('big', 'small');
+console.log(box.className); // box blue foo big small
+
+// remove(...className) : 1개 이상의 속성 값을 제거한다.
+box.classList.remove('foo');
+console.log(box.className); // box blue big small
+box.classList.remove('big', 'small');
+console.log(box.className); // box blue
+
+// item(index) : 인덱스에 해당하는 class를 반환한다.
+let item1 = box.classList.item(0); // box
+console.log(item1); // box
+let item2 = box.classList.item(1); // blue
+console.log(item2); // blue
+
+// contains(className) : 전달받은 값과 일치하는 class의 존재 여부를 확인한다.
+item1 = box.classList.contains('box');
+console.log(item1); // true
+item2 = box.classList.contains('red');
+console.log(item2); // false
+
+// replace(oldClassName, newdClassName) : 기존 class를 새로운 class로 변경한다.
+box.classList.replace('blue', 'red');
+console.log(box.className); // box red
+
+// toggle(className) : 전달한 값이 존재하면 제거하고, 존재하지 않으면 추가한다.
+box.classList.toggle('foo');
+console.log(box.className); // box red foo
+box.classList.toggle('foo');
+console.log(box.className); // box red
+```
+
+<br />
+
+### 모든 CSS 스타일 확인
+
+style 프로퍼티는 인라인 스타일만 반환한다. 그래서 클래스를 적용한 스타일이나 상속을 통해 적용된 스타일, 외부 CSS 파일 등의 스타일은 참조할 수 없다.
+
+HTML 요소에 적용되어 있는 모든 CSS 스타일을 참조해야 할 경우 `getComputedStyle` 메서드를 사용한다.
+
+```html
+<head>
+  <style>
+    .box::after {
+      content: ' World~!';
+    }
+  </style>
+</head>
+<body>
+  <span class="box">Hello</span>
+</body>
+```
+
+```javascript
+const box = document.querySelector('.box');
+
+const computedStyle = window.getComputedStyle(box, '::after');
+console.log(computedStyle.content); //  World~!
+```
