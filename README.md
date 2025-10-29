@@ -72,6 +72,8 @@
 
 - [TypeScript란 무엇인가](./javascript/typescript/01-TypeScript.md)
 - [데이터 타입(Data Type)](./javascript/typescript/02-Data-Type.md)
+- [🚧 제네릭(Generic)](./javascript/typescript/03-Generic.md)
+- [🚧 타입 추론](./javascript/typescript/04-Type-Inference.md)
 
 
 

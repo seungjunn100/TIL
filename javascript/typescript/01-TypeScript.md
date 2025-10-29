@@ -20,6 +20,8 @@
 
 이러한 문제점을 보완하기 위해 **타입스크립트가 등장**했다. 타입스크립트는 자바스크립트를 기반으로 하며, 추가적으로 타입을 부여하여 코드를 안전하게 관리할 수 있고 코드의 의도를 명확하게 이해할 수 있기 때문에 `강형(Strongly Typed) 언어`에 가깝게 사용할 수 있다.
 
+타입스크립트는 런타임 전에 에러를 미리 잡기 위한 도구로 사용된다.
+
 <br />
 
 ### 타입스크립트 동작 방식
@@ -66,60 +68,60 @@ sum(10, 20);
 
 [Node.js](https://nodejs.org/en/download)를 설치한 뒤 `VSCode` 터미널에서 명령어를 통해 타입스크립트를 설치할 수 있다.
 
-```node
+```bash
+# 설치
 npm i -g typescript
+
+# 설치 후 버전 확인 
+tsc --version
+tsc -v
 ```
 
 <br />
 
 ### 타입스크립트 환경 설정 `tsconfig.json`
 
+컴파일러의 컴파일 옵션을 지정할 수 있는 파일이다. `tsconfig.json` 파일 없이 tsc 명령을 실행하면, 기본 설정만을 사용하여 컴파일 한다.
+
+`tsconfig.json` 파일을 생성하기 위해 명령어를 실행해야한다.
+
+```bash
+tsc --init
+```
+
+#### 자주 사용하는 `tsconfig.json` 설정
+
 ```json
 {
-  // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
-    // File Layout
-    "rootDir": "./", // 컴파일할 소스 파일의 루트 경로
-    // "outDir": "./dist", // 컴파일된 JS 파일을 저장할 경로
-
-    // Environment Settings
-    // See also https://aka.ms/tsconfig/module
-    "module": "es2022", // 모듈 시스템 (import/export 방식)
-    "target": "es2022", // 변환할 자바스크립트 버전
-    "types": [], // 전역 타입 정의 파일(.d.ts) 사용 안 함
-    // For nodejs:
-    // "lib": ["esnext"], // 사용할 내장 라이브러리(JS 기능 수준)
-    // "types": ["node"], // Node.js 타입 정의 사용
-    // and npm install -D @types/node // Node 타입 설치 명령어
-
-    // Other Outputs
-    // "sourceMap": true, // 디버깅용 소스맵 파일 생성
-    // "declaration": true, // 타입 선언 파일(.d.ts) 생성
-    // "declarationMap": true, // 선언 파일용 소스맵 생성
-
-    // Stricter Typechecking Options
-    "noUncheckedIndexedAccess": true, // 배열/객체 인덱스 접근 시 undefined 고려
-    "exactOptionalPropertyTypes": true, // 선택적 속성은 undefined만 허용 (엄격)
-
-    // Style Options
-    // "noImplicitReturns": true, // 모든 함수는 반드시 return 명시
-    // "noImplicitOverride": true, // 상속 메서드 override 시 명시적으로 표시 필요
-    // "noUnusedLocals": true, // 사용 안 한 지역 변수 있으면 에러
-    // "noUnusedParameters": true, // 사용 안 한 매개변수 있으면 에러
-    // "noFallthroughCasesInSwitch": true, // switch 문에서 break 누락 방지
-    // "noPropertyAccessFromIndexSignature": true, // 인덱스 시그니처로 정의된 속성 접근 제한
-
-    // Recommended Options
-    "strict": true, // 모든 엄격한 타입 검사 활성화
-    "jsx": "react-jsx", // React JSX 문법 지원
-    "verbatimModuleSyntax": true, // import/export 문법 그대로 유지
-    "isolatedModules": true, // 각 파일을 독립적으로 컴파일 가능하게
-    "noUncheckedSideEffectImports": true, // 부수효과(import 시 실행) 있는 파일 검사
-    "moduleDetection": "force", // 모든 JS/TS 파일을 모듈로 간주
-    "skipLibCheck": true, // 외부 라이브러리 타입 검사 생략(속도↑)
-  }
+    "target": "ES2020", // 어떤 버전의 자바스크립트로 변환할지 지정
+    "module": "ESNext", // 모듈 시스템 지정
+    "strict": true, // 가장 중요한 타입 안전 옵션
+    /*
+      아래의 세부 옵션들을 한번에 켠다.
+      - noImplicitAny
+      - strictNullChecks
+      - strictBindCallApply
+      - strictFunctionTypes
+      - alwaysStrict
+    */
+    "jsx": "react-jsx", // React 17 이상에서 JSX 변환 방식을 사용하도록 설정
+    "moduleResolution": "Node", // Node.js 방식으로 모듈을 해석하도록 설정
+    "esModuleInterop": true, // CommonJS 모듈(require)과 ES 모듈(import)을 호환되게 해주는 설정
+    "forceConsistentCasingInFileNames": true, // 대소문자 불일치 에러를 방지
+    "skipLibCheck": true, // 외부 라이브러리 타입 검사 생략
+    "outDir": "./dist", // 출력(컴파일 결과) 디렉토리를 지정
+    "rootDir": "./src", // 입력(소스) 디렉토리를 지정
+    "baseUrl": "./src", // 모듈을 불러올 때 기준이 되는 기본 경로를 지정
+    "paths": {
+      "@/*": ["*"] // @/로 src 내부를 참조할 수 있도록 별칭 설정
+    },
+    "sourceMap": true, // 디버깅용 소스맵 생성
+    "noImplicitAny": true // 타입을 명시하지 않은 변수에 자동으로 any가 붙는걸 방지
+  },
+  "include": ["src"], // 컴파일 대상 폴더를 지정
+  "exclude": ["node_modules", "dist"] // 컴파일 제외 폴더를 지정
 }
-
 ```
 
 <br />
