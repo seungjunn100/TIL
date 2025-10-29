@@ -68,6 +68,11 @@
 - [🚧 BOM(Browser Object Model)](./javascript/browser/03-BOM.md)
 - [🚧 Web APIs](./javascript/browser/04-Web-APIs.md)
 
+### TypeScript
+
+- [TypeScript란 무엇인가](./javascript/typescript/01-TypeScript.md)
+- [데이터 타입(Data Type)](./javascript/typescript/02-Data-Type.md)
+
 
 
 
