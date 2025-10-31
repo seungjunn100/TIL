@@ -368,6 +368,17 @@ getLanguage(Language.Java); // 전달받은 lang J, 자바 언어
 
 ### 리터럴 타입
 
+특정 `값` 자체를 타입으로 사용하여 잘못된 값의 입력을 막을 수 있어 타입 추론의 범위를 좁혀 안정성을 높일 수 있다.
+
+```typescript
+function wakeUpTime(name: '짱구' | '철수', time: 8 | 9) {
+  console.log(`${name}야, 일어나! ${time}시야!`);
+}
+
+wakeUpTime('짱구', 8); // 짱구야, 일어나! 8시야!
+wakeUpTime('철수', 9); // 철수야, 일어나! 9시야!
+```
+
 
 
 

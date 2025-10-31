@@ -60,6 +60,7 @@
 - [🚧 클로저(Closure)](./javascript/11-Closure.md)
 - [프로토타입(Prototype)](./javascript/12-Prototype.md)
 - [클래스(Class)](./javascript/13-Class.md)
+- [🚧 내장 함수, 객체](./javascript/14-Built-In.md)
 
 ### 브라우저와 Web APIs
 
@@ -73,7 +74,8 @@
 - [TypeScript란 무엇인가](./javascript/typescript/01-TypeScript.md)
 - [데이터 타입(Data Type)](./javascript/typescript/02-Data-Type.md)
 - [제네릭(Generic)](./javascript/typescript/03-Generic.md)
-- [🚧 타입 추론, 단언, 가드, 호환](./javascript/typescript/04-Type-System.md)
+- [타입 추론, 단언, 가드, 호환, 연산자](./javascript/typescript/04-Type-System.md)
+- [유틸리티(Utility) & 맵드(Mapped) 타입](./javascript/typescript/05-Utility-Mapped-Type.md)
 
 
 

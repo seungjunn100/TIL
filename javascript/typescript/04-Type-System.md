@@ -1,9 +1,22 @@
-# 타입 추론, 단언, 가드, 호환
+# 타입 추론, 단언, 가드, 호환, 연산자
 
-- [타입 추론]()
-- [타입 단언]()
-- [타입 가드]()
-- [타입 호환]()
+- [타입 추론](#타입-추론)
+  - [변수의 타입 추론](#변수의-타입-추론)
+  - [객체의 타입 추론](#객체의-타입-추론)
+  - [함수의 타입 추론](#함수의-타입-추론)
+- [타입 단언](#타입-단언)
+  - [Non-null Assertion Operator ( `!` )](#non-null-assertion-operator)
+  - [타입 단언 주의 사항](#타입-단언)
+- [타입 가드](#타입-가드)
+  - [typeof 연산자 사용](#typeof-연산자-사용)
+  - [instanceof 연산자 사용](#instanceof-연산자-사용)
+  - [구별된 유니언 타입 사용](#구별된-유니언-타입-사용)
+  - [사용자 정의 타입 가드 사용](#사용자-정의-타입-가드-사용)
+- [타입 호환](#타입-호환)
+- [타입 연산자](#타입-연산자)
+  - [keyof 연산자](#keyof-연산자)
+  - [typeof 연산자](#typeof-연산자)
+  - [인덱스 접근 타입 ( Indexed Access Types )](#인덱스-접근-타입--indexed-access-types)
 
 
 
@@ -200,6 +213,158 @@ if (a !== null) {
 
 ## 타입 가드
 
+변수로 여러 타입이 지정되었을 경우, 타입의 범위를 좁혀 정확한 타입 추론을 할 수 있도록 도와주는 기능이다.
+
+<br />
+
+### typeof 연산자 사용
+
+```typescript
+// number, string
+function print(msg: number | string) {
+  if (typeof msg === 'string') {
+    // msg가 string 타입으로 추론
+    console.log(msg.toUpperCase());
+  } else {
+    // msg가 number 타입으로 추론
+    console.log(msg.toFixed(2));
+  }
+}
+
+// number, string, null
+function getLength(value: string | number[] | null) {
+  if (value === null) {
+    return 0;
+  }
+  if (typeof value === 'string') {
+    return value.length;
+  }
+  return value.length; // number[] 추론
+}
+```
+
+<br />
+
+### instanceof 연산자 사용
+
+```typescript
+function print(msg: number | string[] | Date){
+  if (typeof msg === 'number') {
+    console.log(msg.toFixed(2));
+  }
+
+  if (msg instanceof Array ) {
+    console.log(msg.length);
+  }
+
+  if (msg instanceof Date) {
+    console.log(msg.getFullYear());
+  }
+}
+```
+
+<br />
+
+### 구별된 유니언 타입 사용
+
+```typescript
+interface User {
+  name: string;
+  grade: '🫘' | '🌱' | '🌸';
+  admin: false; // 속성 정의 시 구체적인 값을 지정한 후 객체의 속성값으로 확인
+}
+
+interface AdminUser {
+  name: string;
+  level: 1 | 2 | 3;
+  admin: true;
+}
+
+const user1: User = {
+  name: 'user',
+  grade: '🫘',
+  admin: false
+};
+
+const user2: AdminUser = {
+  name: 'admin',
+  level: 1,
+  admin: true
+};
+
+function greetUserByRole(user: User | AdminUser) {
+  if (user.admin === true) { // 속성 정의 시 구체적인 값을 지정한 후 객체의 속성값으로 확인
+    console.log(`안녕하세요. Lv ${user.level} "${user.name}" 관리자님!`);
+  } else {
+    console.log(`안녕하세요. ${user.grade} "${user.name}" 유저님!`);
+  }
+}
+
+greetUserByRole(user1); // 안녕하세요. 🫘 "user" 유저님!
+greetUserByRole(user2); // 안녕하세요. Lv 1 "admin" 관리자님!
+```
+
+<br />
+
+### 사용자 정의 타입 가드 사용
+
+```typescript
+interface User {
+  name: string;
+  grade: '🫘' | '🌱' | '🌸';
+  admin: false;
+}
+
+interface AdminUser {
+  name: string;
+  level: 1 | 2 | 3;
+  admin: true;
+}
+
+interface Guest {
+  name: string;
+}
+
+const user1: User = {
+  name: 'user',
+  grade: '🫘',
+  admin: false
+};
+
+const user2: AdminUser = {
+  name: 'admin',
+  level: 1,
+  admin: true
+};
+
+const user3: Guest = {
+  name: 'guest'
+}
+
+function greetUserByRole(user: User | AdminUser | Guest) {
+  if(isAdmin(user)){ // AdminUser일 경우
+    console.log(`안녕하세요. Lv ${user.level} "${user.name}" 관리자님!`);
+  }else if(isUser(user)){ // User일 경우
+    console.log(`안녕하세요. ${user.grade} "${user.name}" 유저님!`);
+  }else{ // Guest일 경우
+    console.log(`안녕하세요. "${user.name}" 게스트님!`);
+  }
+}
+
+// user is AdminUser : 반환값이 true일 경우 user는 AdminUser 타입으로 인식한다.
+// 'admin' in user : 객체에 지정한 속성이 포함되어 있는지 여부를 반환한다.
+function isAdmin(user: User | AdminUser | Guest): user is AdminUser {
+  return 'admin' in user && user.admin === true;
+}
+function isUser(user: User | AdminUser | Guest): user is User {
+  return 'admin' in user && user.admin === false;
+}
+
+greetUserByRole(user1); // 안녕하세요. 🫘 "user" 유저님!
+greetUserByRole(user2); // 안녕하세요. Lv 1 "admin" 관리자님!
+greetUserByRole(user3); // 안녕하세요. "guest" 게스트!
+```
+
 
 
 
@@ -210,3 +375,115 @@ if (a !== null) {
 
 
 ## 타입 호환
+
+한 타입의 값이 다른 타입에 대입될 수 있는지를 판단하는 규칙이다. 이러한 타입 호환은 타입스크립트의 구조적 타입 시스템에 의해 동작된다. 타입을 비교할 때 타입의 구조를 기준으로 호환 여부를 판단한다.
+
+```typescript
+interface User {
+  name: string;
+  grade: '🫘' | '🌱' | '🌸';
+  admin: false;
+}
+
+interface Guest {
+  name: string;
+}
+
+const user1: User = {
+  name: 'user',
+  grade: '🫘',
+  admin: false
+};
+
+const user2: Guest = {
+  name: 'guest'
+};
+
+// Guest 타입은 name 속성만 존재하기에, name 속성을 가지고 있는 타입이라면 호환 가능하다.
+function welcomGreet(user: Guest) {
+  console.log(`안녕하세요. ${user.name}님!`);
+}
+
+welcomGreet(user1); // 안녕하세요. user님!
+welcomGreet(user2); // 안녕하세요. guest님!
+```
+
+
+
+
+<br />
+<br />
+
+
+
+
+## 타입 연산자
+
+### keyof 연산자
+
+객체의 모든 키 이름을 타입으로 지정하여, 객체 타입의 키를 유니언 타입으로 추출 가능하다.
+
+```typescript
+interface Todo {
+  id: number;
+  title: string;
+  content: string;
+}
+
+type TodoKeys = keyof Todo; // 'id' | 'title' | 'content'
+
+function getProperty(obj: Todo, key: TodoKeys) {
+  return obj[key]; // 객체의 속성값을 리턴
+}
+
+const todo: Todo = { id: 1, title: '제목', content: '내용' };
+const id = getProperty(todo, 'id'); // 1
+```
+
+<br />
+
+### typeof 연산자
+
+값으로부터 타입을 반환하는 연산자이다.
+
+```typescript
+const kong = {
+  name: '콩이',
+  age: 10,
+  address: '서울시'
+};
+
+type DogType = typeof kong; // { name: string; age: number; address: string; }
+
+const dandan: DogType = {
+  name: '단단',
+  age: 11,
+  address: '서울시'
+};
+```
+
+<br />
+
+### 인덱스 접근 타입 ( Indexed Access Types )
+
+`객체 타입[속성명]` 형태로 그 속성 값의 타입을 가져오는 문법이다.
+
+```typescript
+// 타입의 특정 속성을 이용해 타입 추출
+interface Todo {
+  id: number;
+  title: string;
+  content: string;
+}
+type TodoTitle = Todo['title']; // string
+type TodoIdOrContent = Todo['id' | 'content']; // number | string
+
+
+// 배열 타입의 요소를 이용해 타입 추출
+type TodoArray = {
+  0: Todo;
+  1: Todo;
+  length: 2;
+};
+type FirstTodo = TodoArray[0]; // Todo
+```
