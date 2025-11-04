@@ -37,6 +37,8 @@
 
 ## 🎨 CSS
 
+### Tailwind CSS
+
 
 
 
@@ -61,6 +63,10 @@
 - [프로토타입(Prototype)](./javascript/12-Prototype.md)
 - [클래스(Class)](./javascript/13-Class.md)
 - [🚧 내장 함수, 객체](./javascript/14-Built-In.md)
+- [에러 핸들링(Error Handling)](./javascript/15-Error-Handling.md)
+- [ESM(ECMAScript Modules)](./javascript/16-ECMAScript-Modules.md)
+- [🚧 엄격 모드(Strict Mode)](./javascript/17-Strict-Mode.md)
+- [🚧 동기(Sync)와 비동기(Async)](./javascript/18-Sync-Async.md)
 
 ### 브라우저와 Web APIs
 
