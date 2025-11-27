@@ -1,7 +1,6 @@
 # Today I Learned
 
 - 천천히, 깊이있게❗️
-- 능동적으로 학습하기❗️
 - 보여주기 위한 것이 아닌, 나의 지식을 위한 것❗️
 
 
@@ -25,7 +24,7 @@
 
 
 
-## 📄 HTML
+## 🟧 HTML
 
 
 
@@ -35,9 +34,7 @@
 
 
 
-## 🎨 CSS
-
-### Tailwind CSS
+## ⬜ CSS
 
 
 
@@ -47,7 +44,17 @@
 
 
 
-## 🔧 JavaScript
+## 🟪 Tailwind CSS
+
+
+
+
+<br />
+
+
+
+
+## 🟨 JavaScript
 
 - [JavaScript란 무엇인가](./javascript/01-JavaScript.md)
 - [변수와 데이터 타입(feat. 메모리)](./javascript/02-Variable-DataType.md)
@@ -65,7 +72,7 @@
 - [🚧 내장 함수, 객체](./javascript/14-Built-In.md)
 - [에러 핸들링(Error Handling)](./javascript/15-Error-Handling.md)
 - [ESM(ECMAScript Modules)](./javascript/16-ECMAScript-Modules.md)
-- [🚧 엄격 모드(Strict Mode)](./javascript/17-Strict-Mode.md)
+- [엄격 모드(Strict Mode)](./javascript/17-Strict-Mode.md)
 - [🚧 동기(Sync)와 비동기(Async)](./javascript/18-Sync-Async.md)
 
 ### 브라우저와 Web APIs
@@ -74,8 +81,19 @@
 - [🚧 이벤트(Event)](./javascript/browser/02-Event.md)
 - [🚧 BOM(Browser Object Model)](./javascript/browser/03-BOM.md)
 - [🚧 Web APIs](./javascript/browser/04-Web-APIs.md)
+- [🚧 HTTP(HyperText Transfer Protocol)](./javascript/browser/05-HTTP.md)
+- [🚧 API(Application Programming Interface)](./javascript/browser/06-API.md)
+- [🚧 Ajax(Asynchronous JavaScript and XML)](./javascript/browser/07-Ajax.md)
 
-### TypeScript
+
+
+
+<br />
+
+
+
+
+## 🟦 TypeScript
 
 - [TypeScript란 무엇인가](./javascript/typescript/01-TypeScript.md)
 - [데이터 타입(Data Type)](./javascript/typescript/02-Data-Type.md)
@@ -91,31 +109,7 @@
 
 
 
-## 📜 Git
+## ⚛️ React
 
-- [Git을 활용한 버전 관리](./git/01-Git-Version-Control.md)
-- [Git 환경 설정](./git/02-Git-Config.md)
-
-
-
-
-<br />
-
-
-
-
-## 🧩 Node
-
-- [Node.js와 관리 도구들](./node/01-Node.md)
-
-
-
-
-<br />
-
-
-
-
-## ⚙️ ETC
-
-- [Shell과 CLI](./etc/CLI.md)
+- [웹 개발의 변화](./react/01-web-development-evolution.md)
+- [리액트 라이브러리의 원리를 이해하는 과정](./react/02-understanding-react-core.md)
