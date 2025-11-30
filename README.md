@@ -112,4 +112,5 @@
 ## ⚛️ React
 
 - [웹 개발의 변화](./react/01-web-development-evolution.md)
-- [리액트 라이브러리의 원리를 이해하는 과정](./react/02-understanding-react-core.md)
+- [리액트 라이브러리의 원리](./react/02-understanding-react-core.md)
+- [리액트 시작](./react/03-react-start.md)
