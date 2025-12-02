@@ -113,4 +113,6 @@
 
 - [웹 개발의 변화](./react/01-web-development-evolution.md)
 - [리액트 라이브러리의 원리](./react/02-understanding-react-core.md)
-- [리액트 시작](./react/03-react-start.md)
+- [리스트 렌더링과 함수 전달 방식의 차이](./react/03-key-and-function.md)
+- [리액트 시작](./react/04-react-start.md)
+- [빌드 도구 `Vite`](./react/05-react-with-vite.md)

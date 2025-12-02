@@ -4,7 +4,6 @@
 - [주요 개념](#주요-개념)
   - [`createRoot`](#createroot)
   - [`useState`](#usestate)
-  - [`props`](#props)
 
 
 
@@ -161,37 +160,3 @@ useState: (initValue) => {
   - 값이 다르면, `_root.render()` 호출
 
   - `_root.render()`는 다시 `App()`을 실행 → 최신 `_stateValue`를 읽어서 새로운 UI 트리를 만들어 붙임
-
-<br />
-
-### `props`
-
-- 부모 컴포넌트가 자식 컴포넌트에게 **데이터**를 전달하는 방법
-
-- 자식이 부모의 상태를 변경하려면 부모의 함수를 받아서 실행
-
-- **단방향(부모 → 자식)** 데이터 흐름이 유지되고 구조 예측 가능
-
-- props를 하나의 객체 형태로 전달하는 이유
-
-  - 데이터 흐름을 이름 기반으로 안정적
-    - 이름만 맞으면 됨
-    - 순서 상관없이 필요한 것만 선택적으로 사용 가능
-
-  - 컴포넌트의 확장성/유지보수성/가독성을 극대화
-
-  ```javascript
-  // 객체 그대로 받기
-  function Todo(props) {
-    console.log(props.itemList);
-    console.log(props.addItem);
-    console.log(props.deleteItem);
-  }
-
-  // 구조 분해 할당으로 받기
-  function Todo({ itemList, addItem, deleteItem }) {
-    console.log(itemList);    // props. 없이 바로 사용 가능
-    console.log(addItem);
-    console.log(deleteItem);
-  }
-  ```
