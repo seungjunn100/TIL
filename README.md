@@ -95,11 +95,11 @@
 
 ## 🟦 TypeScript
 
-- [TypeScript란 무엇인가](./javascript/typescript/01-TypeScript.md)
-- [데이터 타입(Data Type)](./javascript/typescript/02-Data-Type.md)
-- [제네릭(Generic)](./javascript/typescript/03-Generic.md)
-- [타입 추론, 단언, 가드, 호환, 연산자](./javascript/typescript/04-Type-System.md)
-- [유틸리티(Utility) & 맵드(Mapped) 타입](./javascript/typescript/05-Utility-Mapped-Type.md)
+- [TypeScript란 무엇인가](./typescript/01-TypeScript.md)
+- [데이터 타입(Data Type)](./typescript/02-Data-Type.md)
+- [제네릭(Generic)](./typescript/03-Generic.md)
+- [타입 추론, 단언, 가드, 호환, 연산자](./typescript/04-Type-System.md)
+- [유틸리티(Utility) & 맵드(Mapped) 타입](./typescript/05-Utility-Mapped-Type.md)
 
 
 
@@ -111,8 +111,8 @@
 
 ## ⚛️ React
 
-- [웹 개발의 변화](./react/01-web-development-evolution.md)
-- [리액트 라이브러리의 원리](./react/02-understanding-react-core.md)
-- [리스트 렌더링과 함수 전달 방식의 차이](./react/03-key-and-function.md)
-- [리액트 시작](./react/04-react-start.md)
-- [빌드 도구 `Vite`](./react/05-react-with-vite.md)
+- [웹 개발의 변화](./react/01-Web-Development-Evolution.md)
+- [리액트 라이브러리의 원리](./react/02-Understanding-React-Core.md)
+- [리스트 렌더링과 함수 전달 방식의 차이](./react/03-Key-and-Function.md)
+- [리액트 시작](./react/04-React-Start.md)
+- [빌드 도구 `Vite`](./react/05-React-with-Vite.md)
