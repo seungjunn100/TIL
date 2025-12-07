@@ -886,3 +886,277 @@ function handleAddressChange(id: number, value: string) {
 - 변경된 부분만 복사하여 새로운 `불변 객체(newUser)` 를 생성한다.
 
 - `원본 객체(user)`는 절대 건드리지 않는다.
+
+<br />
+
+### 회원가입 상태 관리
+
+```javascript
+// 이메일 검증 정규식
+const emailExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+// 휴대폰 검증 정규식
+const cellphoneExp = /^010[0-9]{3,4}[0-9]{4}$/;
+
+...
+```
+
+- 검증할 대상의 정규식 설정해두고 `test()` 메서드를 통해 `true`인지 `false`인지 체크할 수 있다.
+
+```javascript
+interface Member {
+  name: string;
+  email: string;
+  cellphone: string;
+}
+
+interface FormErrors {
+  name?: { message: string };
+  email?: { message: string };
+  cellphone?: { message: string };
+}
+
+...
+```
+
+- 값의 타입이 어떤 타입으로 올지 정하고 오타가 발생하면 오타를 잡아주는 등 유지보수성과 안정성을 위해 타입을 설정
+
+- `user`에 대한 타입과 `errors`에 대한 타입을 명시
+
+  - `useState<FormErrors>`처럼 제네릭으로 타입이 설정된 이유는 
+
+    - `errors`가 해당 타입의 형태여야 하고 `setErrors`에 전달되는 인자도 해당 타입의 형태가 되야하기 때문이다.
+
+```javascript
+function App() {
+
+  const [ name, setName ] = useState('');
+  const [ email, setEmail ] = useState('');
+  const [ cellphone, setCellphone ] = useState('010');
+
+  const user: Member = {
+    name,
+    email,
+    cellphone
+  }
+
+  function handleNameChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setName(event.target.value);
+  }
+
+  function handelEmailChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setEmail(event.target.value);
+  }
+
+  function handleCellphoneChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setCellphone(event.target.value);
+  }
+
+  ...
+```
+
+- `input`의 입력값에 따라 상태값의 변경 유무를 확인하고 리렌더링할 수 있는 함수 설정
+
+- `name`, `email`, `cellphone`은 각각의 하나의 회원 정보로 볼 수있는 연관된 데이터이므로 `user` 객체로 설정
+
+```javascript
+  const [ errors, setErrors ] = useState<FormErrors>({});
+
+  function validate() {
+    let newErrors = {};
+
+    if (user.name.trim() === "") {
+      newErrors = {
+        name: { message: "이름을 입력하세요." }
+      };
+    } else if (user.name.trim().length < 2) {
+      newErrors = {
+        name: { message: "2글자 이상 입력하세요." }
+      };
+    } else if (user.email.trim() === "") {
+      newErrors = {
+        email: { message: "이메일을 입력하세요." }
+      };
+    } else if (emailExp.test(user.email) === false) {
+      newErrors = {
+        email: { message: "이메일 양식에 맞지 않습니다." },
+      };
+    } else if (user.cellphone.trim() === "") {
+      newErrors = {
+        cellphone: { message: "휴대폰 번호를 입력하세요." },
+      };
+    } else if (cellphoneExp.test(user.cellphone) === false) {
+      newErrors = {
+        cellphone: { message: "휴대폰 형식에 맞지 않습니다." },
+      };
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors); // 입력값 검증 실패 메세지
+    } else {
+      console.log('서버 전송', user); // 입력값 검증 통과 메세지
+    }
+  }
+
+  ...
+```
+
+- `input`의 입력값에 따라 검증을 순차적으로 확인하는 메서드
+
+- 해당 요소에 대한 `errors`의 상태값을 새로운 `newErrors`에 저장하여 상태값의 변경 유무에 따라 리렌더링한다.
+
+```javascript
+  function registMember(event: React.FormEvent) {
+    event.preventDefault();
+    validate();
+  }
+
+  ...
+```
+
+- `submit` 버튼을 눌렀을 때 `form` 요소에서 발생할 이벤트 핸들러
+
+- 원래 `submit` 버튼을 누르면, 브라우저 내에서 새로고침이 발생한다.
+
+  - `event.preventDefault()` 코드를 추가하면 해당 동작을 막을 수 있다.
+
+```javascript
+  return (
+    <>
+      <h1>15 회원가입 입력값 상태 관리</h1>
+
+      <form onSubmit={ registMember }>
+        <label htmlFor="name">이름</label>
+        <input id="name" name="name" value={ user.name } onChange={ handleNameChange } /><br />
+        <div className="error-style">{ errors.name?.message }</div>
+
+        <label htmlFor="email">이메일</label>
+        <input id="email" name="email" value={ user.email } onChange={ handelEmailChange } /><br />
+        <div className="error-style">{ errors.email?.message }</div>
+
+        <label htmlFor="cellphone">휴대폰</label>
+        <input id="cellphone" name="cellphone" value={ user.cellphone } onChange={ handleCellphoneChange } /><br />
+        <div className="error-style">{ errors.cellphone?.message }</div>
+
+        <button type="submit">가입</button>
+      </form>
+
+      <p>
+        이름: { user.name } <br />
+        이메일: { user.email } <br />
+        휴대폰: { user.cellphone } <br />
+      </p>
+    </>
+  )
+}
+```
+
+- 각 요소의 이벤트 핸들러에 의해 데이터를 리렌더링
+
+<br />
+
+#### 공통된 부분을 하나로 코드 개선
+
+```javascript
+  const [ user, setUser ] = useState<Member>({
+    name: '',
+    email: '',
+    cellphone: '010'
+  });
+
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const newUser = {
+      ...user,
+      [event.target.name]: event.target.value,
+    };
+    setUser(newUser);
+    validate({ data: newUser });
+  }
+```
+
+- 전에는 각각의 상태만 관리했다면, 지금은 `user`의 상태만 관리하면 된다.
+
+- 이벤트 핸들러도 하나로 모든 `input`을 처리할 수 있다.
+
+  - 객체의 참조 주소가 같으면 상태가 변경된줄 모르기 때문에 새로운 객체를 생성
+
+  - 새로운 객체를 생성하고 그 위에 해당 `input`의 입력값으로 덮어씌운다.
+
+  - 상태값의 변경의 유무를 확인하고 리렌더링 진행
+
+<br />
+
+#### 에러 메세지 출력 방법
+
+```javascript
+interface ValidateOptions {
+  criteriaMode?: 'firstError' | 'all';
+  data?: Member;
+}
+
+  function validate({ criteriaMode = 'firstError', data }: ValidateOptions = {}){
+    const userInfo = data || user;
+
+    let newErrors: FormErrors = {};
+
+    if (criteriaMode === "all") {
+      if (userInfo.name.trim() === "") {
+        newErrors.name = { message: "이름을 입력하세요." };
+      } else if (userInfo.name.trim().length < 2) {
+        newErrors.name = { message: "2글자 이상 입력하세요." };
+      }
+
+      if (userInfo.email.trim() === "") {
+        newErrors.email = { message: "이메일을 입력하세요." };
+      } else if (emailExp.test(userInfo.email) === false) {
+        newErrors.email = { message: "이메일 양식에 맞지 않습니다." };
+      }
+
+      if (userInfo.cellphone.trim() === "") {
+        newErrors.cellphone = { message: "휴대폰 번호를 입력하세요." };
+      } else if (cellphoneExp.test(userInfo.cellphone) === false) {
+        newErrors.cellphone = { message: "휴대폰 형식에 맞지 않습니다." };
+      }
+    } else {
+      if (userInfo.name.trim() === "") {
+        newErrors = {
+          name: { message: "이름을 입력하세요." },
+        };
+      } else if (userInfo.name.trim().length < 2) {
+        newErrors = {
+          name: { message: "2글자 이상 입력하세요." },
+        };
+      } else if (userInfo.email.trim() === "") {
+        newErrors = {
+          email: { message: "이메일을 입력하세요." },
+        };
+      } else if (emailExp.test(userInfo.email) === false) {
+        newErrors = {
+          email: { message: "이메일 양식에 맞지 않습니다." },
+        };
+      } else if (userInfo.cellphone.trim() === "") {
+        newErrors = {
+          cellphone: { message: "휴대폰 번호를 입력하세요." },
+        };
+      } else if (cellphoneExp.test(userInfo.cellphone) === false) {
+        newErrors = {
+          cellphone: { message: "휴대폰 형식에 맞지 않습니다." },
+        };
+      }
+    }
+
+    setErrors(newErrors);
+  }
+  
+  function registMember(event: React.FormEvent) {
+    event.preventDefault();
+
+    validate({
+      // 첫번째 발견된 에러만 보여줄 수 있게.. (기본값)
+      criteriaMode: 'firstError', 
+      // criteriaMode: 'all', 
+      // 모든 에러를 보여줄 수 있게..
+    });
+  }
+```
+
+- 에러 메세지를 하나씩 렌더링할 것인지 한 번에 모두 렌더링해서 보여줄 것인지 설정을 통해 에러메세지를 다양한 방법으로 렌더링할 수 있다.
