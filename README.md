@@ -116,3 +116,5 @@
 - [리스트 렌더링과 함수 전달 방식의 차이](./react/03-Key-and-Function.md)
 - [리액트 시작](./react/04-React-Start.md)
 - [빌드 도구 `Vite`](./react/05-React-with-Vite.md)
+- [클래스 컴포넌트](./react/06-React-Class-Component.md)
+- [컴포넌트 라이프 사이클](./react/07-Component-Life-Cycle.md)
