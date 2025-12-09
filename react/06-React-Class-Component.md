@@ -133,7 +133,7 @@ class ClickMe extends Component<ClickMeProps, ClickMeState> {
 
 - 클래스에서는 상태를 여러 개 변수로 사용할 수 없고 `state`의 객체 안에 여러개의 상태를 넣어 관리해야 한다.
 
-- 하지만 `setState()` 함수의 `this`는 `undefined`가 되어 타입에러가 발생한다.
+- `setState()` 함수의 `this`는 `undefined`가 되어 타입에러가 발생한다.
 
   - 클래스 내부는 기본적으로 엄격 모드가 적용된다.
 

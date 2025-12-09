@@ -13,6 +13,7 @@
   - [componentDidUpdate(prevProps, prevState, snapshot)](#componentdidupdateprevprops-prevstate-snapshot)
 - [Unmounting](#unmounting)
   - [componentWillUnmount()](#componentwillunmount)
+- [메소드가 두번씩 호출되는 이유](#메소드가-두번씩-호출되는-이유)
 
 
 
@@ -298,3 +299,24 @@ componentWillUnmount(): void {
 ![Unmounting Cycle](../src/images/unmounting-cycle.png)
 
 - 컴포넌트 제거되면서 `componentWillUnmount()` 호출됨
+
+
+
+
+<br />
+<br />
+
+
+
+
+## 메소드가 두번씩 호출되는 이유
+
+`main.jsx`의 `<StrictMode>`에 의해 개발 모드에서 버그를 체크할 수 있도록 의도적으로 두번 렌더링
+
+### StrictMode를 사용할 경우
+
+- 순수 함수 여부 확인을 위해 추가 렌더링
+
+- 클린업 여부 확인을 위해 Effect 추가 실행
+
+  - 마운트/언마운트를 2번 해서 클린업 함수가 제대로 작동하는지 확인
