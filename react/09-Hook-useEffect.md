@@ -100,6 +100,8 @@ function Counter({ children }: CounterProps) {
 
 - 렌더링 후에 `useEffect`에 의해 `setup` 함수가 실행되어 `input`에 `focus` 상태가 되었다.
 
+<br />
+
 ```jsx
 function Counter({ children }: CounterProps) {
   ...
@@ -133,6 +135,8 @@ function Counter({ children }: CounterProps) {
 
 ![useEffect](../src/images/useEffect-2.png)
 
+<br />
+
 ```jsx
 function Counter({ children }: CounterProps) {
   ...
@@ -155,6 +159,8 @@ function Counter({ children }: CounterProps) {
 - `dependencies`를 `step`으로 지정해주어 `step`이 수정되면 `setup` 함수가 실행된다.
 
   - 버튼에 의한 리렌더링은 `useEffect`에 영향을 주지 않는다.
+
+<br />
 
 ```jsx
 function Counter({ children }: CounterProps) {
@@ -186,6 +192,24 @@ function Counter({ children }: CounterProps) {
 
 - 렌더링이 반복될 때마다 새로운 타이머가 만들어진다.
 
-  - 여러 이벤트들을 통해 여러 타이머가 만들어지면 점점 타이머 기하 급수적으로 늘어나게되어 좋지 않다.
+  - 여러 이벤트들을 통해 여러 타이머가 만들어지면 타이머가 점점 기하 급수적으로 늘어나게 되어 좋지 않다.
 
 - 이를 방지하기 위해 `cleanup` 함수에서 이전 타이머를 삭제하고 `setup` 함수에 의해 만들어진 새로운 타이머 하나만 유지되도록 한다.
+
+<br />
+
+### useEffect에서 주로 구현하는 기능
+
+- 서버에서 데이터 `fetching`
+
+- 렌더링 작업 외에 작업
+
+  - 브라우저 이벤트, 타이머 등
+
+    - 설치(setup)한 기능의 정리(clean-up)
+
+      - 이벤트 제거, 타이머 해제 등
+
+- 렌더링 이후에 처리할 작업
+
+  - `state`, `props` 변화에 따른 `DOM` 조작
