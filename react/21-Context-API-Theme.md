@@ -1,0 +1,44 @@
+# Context API를 이용한 테마 변경
+
+- [Context, Provider 생성](#context-provider-생성)
+- [Context 제공 및 사용](#context-제공-및-사용)
+
+
+
+
+<br />
+<br />
+
+
+
+
+## Context, Provider 생성
+
+- `Context` 객체 생성(기본값 설정), `Provider` 컴포넌트 생성
+
+  ![context-theme-1](../src/images/context-theme-1.png)
+
+  - `toggleTheme` 이벤트에 의해 `theme` 상태가 바뀌면, `Provider` 컴포넌트가 리렌더링 되기 때문에 `class`를 토글하는 함수가 다시 실행되어 동작한다.
+
+
+
+
+<br />
+<br />
+
+
+
+
+## Context 제공 및 사용
+
+![context-theme-2](../src/images/context-theme-2.png)
+
+- `theme` 상태 값에 따른 조건부 렌더링 설정
+
+- `Provider`가 없어 `Context`를 제공하지 못하면, `Context`는 기본으로 설정한 값으로 동작하게된다.
+
+- `ThemeToggle` 컴포넌트의 버튼은 기본값으로만 동작하므로 상태가 변경되지 않아 아무런 동작도 하지 않는 것처럼 보인다.
+
+![context-theme-3](../src/images/context-theme-3.png)
+
+- `Provider`를 공통 부모쪽에 선언하여 자식, 후속 컴포넌트에서 `Context`를 제공받아 사용할 수 있다.
