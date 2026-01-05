@@ -1,0 +1,55 @@
+# Next.js 페이지 이동
+
+- [Link 컴포넌트](#link-컴포넌트)
+- [usePathname](#usepathname)
+
+
+
+
+<br />
+<br />
+
+
+
+
+## Link 컴포넌트
+
+- `<a>` 태그는 전체 페이지를 새로 요청해 앱을 다시 시작한다.
+
+- `Link` 컴포넌트는 새로고침 없이 필요한 부분만 전환해 빠르고 자연스러운 이동을 제공한다.
+
+```tsx
+import Link from "next/link";
+...
+<li><Link href="/" className={`hover:underline`}>Home</Link></li>
+<li><Link href="/about" className={`hover:underline`}>About</Link></li>
+<li><Link href="/posts" className={`hover:underline`}>게시판</Link></li>
+<li><Link href="/user/login" className={`hover:underline`}>로그인</Link></li>
+<li><Link href="/user/signup" className={`hover:underline`}>회원가입</Link></li>
+...
+```
+
+
+
+
+<br />
+<br />
+
+
+
+
+## usePathname
+
+- 현재 `URL` 경로를 가져오는 훅
+
+- 활성 링크 스타일링 등에 활용
+
+- `'use client'` 지시어가 있는 클라이언트 컴포넌트에서만 사용 가능
+
+  - `usePathname` 훅은 클라이언트 컴포넌트에서만 사용 가능하다.
+  
+  - 지시어를 정의하면 서버 컴포넌트에서 클라이언트 컴포넌트로 동작하게 된다.
+
+![usePathname 훅 사용](../src/images/nextjs-usePathname.png)
+
+- 경로 일치시 클래스를 추가하여 활성 링크 스타일을 적용할 수 있다.
